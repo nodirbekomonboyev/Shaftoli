@@ -18,9 +18,14 @@
       </properties>
 
   <dependencies>
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.28</version>
+      </dependency>
 
       <dependency>
-      <groupId>org.springframework</groupId>
+          <groupId>org.springframework</groupId>
           <artifactId>spring-webmvc</artifactId>
           <version>6.0.11</version>
       </dependency>
@@ -29,12 +34,6 @@
           <groupId>org.springframework</groupId>
           <artifactId>spring-jdbc</artifactId>
           <version>5.3.28</version>
-      </dependency>
-
-      <dependency>
-          <groupId>org.projectlombok</groupId>
-          <artifactId>lombok</artifactId>
-          <version>1.18.28</version>
       </dependency>
 
       <dependency>
@@ -73,7 +72,6 @@
           <version>${junit.version}</version>
           <scope>test</scope>
       </dependency>
-
       <dependency>
           <groupId>org.junit.jupiter</groupId>
           <artifactId>junit-jupiter-engine</artifactId>

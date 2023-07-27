@@ -1,5 +1,6 @@
 package uz.pdp.shaftoli.service.user;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import uz.pdp.shaftoli.model.User;
 import java.util.ArrayList;
