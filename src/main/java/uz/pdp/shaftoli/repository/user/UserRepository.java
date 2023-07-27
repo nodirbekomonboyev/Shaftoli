@@ -1,9 +1,10 @@
 package uz.pdp.shaftoli.repository.user;
 
 import uz.pdp.shaftoli.model.User;
+import uz.pdp.shaftoli.repository.BaseRepository;
 
-public interface UserRepository {
-    User save(User user);
+public interface UserRepository extends BaseRepository<User> {
+
 
 
 
