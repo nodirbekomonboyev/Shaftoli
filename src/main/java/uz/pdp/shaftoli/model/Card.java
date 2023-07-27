@@ -14,6 +14,7 @@ import java.util.UUID;
 public class Card extends BaseModel{
     private UUID ownerId;
     private String cardNumber;
+    private String password;
     private Double balance;
     private CardType type;
     private Boolean status;
