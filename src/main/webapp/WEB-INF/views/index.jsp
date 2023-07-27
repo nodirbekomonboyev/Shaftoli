@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +8,7 @@
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="<c:url value="/styles/style.css"/>"/>
     <title>Sign in & Sign up Form</title>
   </head>
   <body>
@@ -78,16 +79,15 @@
       <div class="panels-container">
         <div class="panel left-panel">
           <div class="content">
-            <h3>New here ?</h3>
+            <h3>Shaftoli</h3>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+              Biz bilan o'tkazmalar oson va qulay!
             </p>
             <button class="btn transparent" id="sign-up-btn">
               Sign up
             </button>
           </div>
-          <img src="img/log.svg" class="image" alt="" />
+          <img src="<c:url value="/styles/img/log.svg"/>" class="image" alt="" />
         </div>
         <div class="panel right-panel">
           <div class="content">
@@ -100,11 +100,11 @@
               Sign in
             </button>
           </div>
-          <img src="img/register.svg" class="image" alt="" />
+          <img src="<c:url value="/styles/img/register.svg"/>" class="image" alt="" />
         </div>
       </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="../../styles/app.js"></script>
   </body>
 </html>
