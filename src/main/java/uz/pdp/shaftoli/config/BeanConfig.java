@@ -15,7 +15,7 @@ BeanConfig {
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:5432/shaftoli");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("2311");
+        dataSource.setPassword("4949");
         return dataSource;
     }
 
