@@ -44,7 +44,4 @@ public class CardRepositoryImpl implements CardRepository{
         public ArrayList<Card> getAll() {
             return (ArrayList<Card>) jdbcTemplate.query(GET_ALL, new CardMapper());
         }
-
-
-
 }
