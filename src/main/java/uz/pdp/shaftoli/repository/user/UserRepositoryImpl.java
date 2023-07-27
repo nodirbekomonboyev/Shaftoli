@@ -39,4 +39,18 @@ public class UserRepositoryImpl implements UserRepository{
         return jdbcTemplate.queryForObject(GET_USER_BY_EMAIL, new UserMapper(), email);
     }
 
+    @Override
+    public Boolean checkUserValidate(String email) {
+        return jdbcTemplate.queryForObject(GET_USER_BY_ID, new UserMapper(), email).getValidated();
+
+    }
+
+    @Override
+    public void changeValidated(String email) {
+        jdbcTemplate.update(
+                CHANGE_VALIDATED,
+                email);
+    }
+
+
 }
