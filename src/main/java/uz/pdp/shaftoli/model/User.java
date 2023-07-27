@@ -15,4 +15,5 @@ User extends BaseModel{
     private UserRole role;
     private String email;
     private String password;
+    private Boolean validated;
 }
