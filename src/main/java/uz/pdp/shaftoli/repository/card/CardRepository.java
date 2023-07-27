@@ -1,6 +1,9 @@
 package uz.pdp.shaftoli.repository.card;
 
-public interface CardRepository {
+import uz.pdp.shaftoli.model.Card;
+import uz.pdp.shaftoli.repository.BaseRepository;
+
+public interface CardRepository extends BaseRepository<Card> {
 //new fileasdfasd
 
 }
