@@ -2,11 +2,10 @@ package uz.pdp.shaftoli.service.user;
 
 import org.springframework.stereotype.Service;
 import uz.pdp.shaftoli.model.User;
-
 import java.util.ArrayList;
-import java.util.Objects;
 
 
+@Service
 public class UserServiceImpl implements UserService{
     @Override
     public User add(User user) {
@@ -22,5 +21,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getById() {
         return null;
+    }
+
+    @Override
+    public void signUp(User user) {
+
     }
 }
