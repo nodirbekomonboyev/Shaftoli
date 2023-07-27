@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class User extends BaseModel{
+public class
+User extends BaseModel{
     private String name;
     private UserRole role;
     private String email;
