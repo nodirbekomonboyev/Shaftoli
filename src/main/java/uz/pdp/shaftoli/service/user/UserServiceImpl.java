@@ -6,12 +6,17 @@ import java.util.ArrayList;
 
 public class UserServiceImpl implements UserService{
     @Override
-    public User addUser(User user) {
-     return user;
+    public User add(User user) {
+        return null;
     }
 
     @Override
     public ArrayList<User> getAll() {
+        return null;
+    }
+
+    @Override
+    public User getById() {
         return null;
     }
 }
