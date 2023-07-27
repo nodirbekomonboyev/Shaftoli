@@ -1,9 +1,11 @@
 package uz.pdp.shaftoli.service.user;
 
+import org.springframework.stereotype.Service;
 import uz.pdp.shaftoli.model.User;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
 
 public class UserServiceImpl implements UserService{
     @Override
