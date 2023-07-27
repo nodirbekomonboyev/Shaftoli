@@ -8,4 +8,5 @@ public interface BaseRepository<T>{
     ArrayList<T> getAll();
     T getById();
 
+
 }
