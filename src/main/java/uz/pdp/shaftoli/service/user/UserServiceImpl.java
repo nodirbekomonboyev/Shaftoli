@@ -13,10 +13,11 @@ import java.util.ArrayList;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
-
+private final UserRepository userRepository;
 
     @Override
     public User add(User user) {
+        userRepository.save(user);
         return user;
     }
 
@@ -32,8 +33,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void signUp(User user) {
-
+    public void userValidation(String email) {
+        userRepository.changeValidated(email);
     }
-
 }
