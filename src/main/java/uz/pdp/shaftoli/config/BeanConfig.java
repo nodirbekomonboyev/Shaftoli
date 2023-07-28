@@ -1,30 +1,29 @@
 package uz.pdp.shaftoli.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @Configuration
 public class BeanConfig {
-    public static Connection connection;
+   @Bean
+    public DataSource dataSource() {
+       DriverManagerDataSource dataSource = new DriverManagerDataSource();
+       dataSource.setDriverClassName("org.postgresql.Driver");
+       dataSource.setUrl("jdbc:postgresql://localhost:5432/shaftoli");
+       dataSource.setUsername("postgres");
+       dataSource.setPassword("123");
+       return dataSource;
+   }
 
-    public Connection getConnection() {
-        if(connection==null){
-            try {
-                Class.forName("org.postgresql.Driver");
-                connection=  DriverManager.getConnection(
-                        "jdbc:postgresql://localhost:5432/shaftoli",
-                        "postgres",
-                        "2311"
-                );
-                //return connection;
-            } catch (ClassNotFoundException | SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return connection;
-    }
-
+   @Bean
+   public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+      return new JdbcTemplate(dataSource);
+   }
 }

@@ -3,12 +3,13 @@ package uz.pdp.shaftoli.repository.card;
 import uz.pdp.shaftoli.model.Card;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class CardRepositoryImpl implements CardRepository{
 
     @Override
-    public Card save(Card card) {
-        return null;
+    public void save(Card card) {
+
     }
 
     @Override
@@ -17,7 +18,7 @@ public class CardRepositoryImpl implements CardRepository{
     }
 
     @Override
-    public Card getById() {
+    public Card getById(UUID id) {
         return null;
     }
 }
