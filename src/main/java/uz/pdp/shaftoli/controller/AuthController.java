@@ -21,7 +21,7 @@ public class AuthController {
 
     @RequestMapping(value = "/auth/sign-up", method = RequestMethod.POST)
     public String signUp(@ModelAttribute User user) {
-        userService.signUp(user);
+        userService.add(user);
         return "verification";
     }
 
