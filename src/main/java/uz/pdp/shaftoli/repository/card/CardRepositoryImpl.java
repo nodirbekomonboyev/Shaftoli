@@ -1,46 +1,55 @@
 package uz.pdp.shaftoli.repository.card;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
-import uz.pdp.shaftoli.entity.Card;
-
+import uz.pdp.shaftoli.entity.CardEntity;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
 public class CardRepositoryImpl implements CardRepository{
 
-        private final JdbcTemplate jdbcTemplate;
+        private final SessionFactory sessionFactory;
+        private final Connection connection;
 
         @Override
-        public Card save(Card card) {
-            jdbcTemplate.update(
-                    INSERT_CARD,
-                    card.getId(),
-                    card.getOwnerId(),
-                    card.getCardNumber(),
-                    card.getPassword(),
-                    card.getBalance(),
-                    card.getType(),
-                    card.getStatus());
+        public CardEntity save(CardEntity card) {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            session.persist(card);
+            transaction.commit();
+            session.close();
             return card;
         }
 
         @Override
-        public Card getById(UUID id) {
-            return jdbcTemplate.queryForObject(GET_CARD_BY_ID, new CardMapper(), id);
+        public CardEntity getById(UUID id) {
+            try(Session session = sessionFactory.openSession()) {
+                Transaction transaction = session.beginTransaction();
+                CardEntity card = session.get(CardEntity.class, id);
+                transaction.commit();
+                return card;
+            }
         }
 
-      //  public Card findByCardname(String username) {
-      //      Card user = jdbcTemplate.queryForObject(GET_USER_BY_USERNAME, new CardMapper(), username);
-      //      return user;
-//
-      //  }
-
         @Override
-        public ArrayList<Card> getAll() {
-            return (ArrayList<Card>) jdbcTemplate.query(GET_ALL, new CardMapper());
+        public ArrayList<CardEntity> getAll() {
+            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+
+            List<CardEntity> dataList = session.createQuery(GET_ALL).getResultList();
+            session.getTransaction().commit();
+            session.close();
+            sessionFactory.close();
+            return (ArrayList<CardEntity>) dataList;
         }
 }

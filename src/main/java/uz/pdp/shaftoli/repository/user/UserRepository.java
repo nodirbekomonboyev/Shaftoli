@@ -16,7 +16,7 @@ public interface UserRepository extends BaseRepository<UserEntity> {
 
     UserEntity checkUser(String email);
     UserEntity getByEmail(String email);
-    Boolean checkUserValidate(String email);
+    String checkUserValidate(String email);
     void changeValidated(String email);
 
 }
