@@ -8,14 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 import uz.pdp.shaftoli.entity.UserEntity;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Repository
