@@ -17,39 +17,42 @@ import java.util.UUID;
 public class CardRepositoryImpl implements CardRepository{
 
         private final SessionFactory sessionFactory;
-        private final Connection connection;
 
         @Override
         public CardEntity save(CardEntity card) {
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-            session.persist(card);
-            transaction.commit();
-            session.close();
+
             return card;
+        //    Session session = sessionFactory.openSession();
+        //    Transaction transaction = session.beginTransaction();
+        //    session.persist(card);
+        //    transaction.commit();
+        //    session.close();
+        //    return card;
         }
 
         @Override
         public CardEntity getById(UUID id) {
-            try(Session session = sessionFactory.openSession()) {
-                Transaction transaction = session.beginTransaction();
-                CardEntity card = session.get(CardEntity.class, id);
-                transaction.commit();
-                return card;
-            }
+          return null;
+           // try(Session session = sessionFactory.openSession()) {
+           //     Transaction transaction = session.beginTransaction();
+           //     CardEntity card = session.get(CardEntity.class, id);
+           //     transaction.commit();
+           //     return card;
+           // }
         }
 
         @Override
         public ArrayList<CardEntity> getAll() {
-            SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
-
-            List<CardEntity> dataList = session.createQuery(GET_ALL).getResultList();
-            session.getTransaction().commit();
-            session.close();
-            sessionFactory.close();
-            return (ArrayList<CardEntity>) dataList;
+           return null;
+            // SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+//
+           // Session session = sessionFactory.openSession();
+           // session.beginTransaction();
+//
+           // List<CardEntity> dataList = session.createQuery(GET_ALL).getResultList();
+           // session.getTransaction().commit();
+           // session.close();
+           // sessionFactory.close();
+           // return (ArrayList<CardEntity>) dataList;
         }
 }
