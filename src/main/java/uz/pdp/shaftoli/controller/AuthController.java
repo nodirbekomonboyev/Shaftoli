@@ -16,11 +16,13 @@ public class AuthController {
 
     @RequestMapping(value = "/auth/sign-up")
     public String signUpPage() {
+
         return "sign-up";
     }
 
     @RequestMapping(value = "/auth/sign-up", method = RequestMethod.POST)
     public String signUp(@ModelAttribute User user) {
+
         userService.add(user);
         return "verification";
     }

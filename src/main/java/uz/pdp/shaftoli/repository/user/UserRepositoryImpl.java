@@ -2,9 +2,13 @@ package uz.pdp.shaftoli.repository.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import uz.pdp.shaftoli.model.User;
 import uz.pdp.shaftoli.model.UserMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -14,8 +18,8 @@ public class UserRepositoryImpl implements UserRepository{
     private final JdbcTemplate jdbcTemplate;
     @Override
     public User save(User user) {
-        User user1 = checkUser(user.getEmail());
-        if(user1 == null){
+        Boolean checkUser = checkUser(user.getEmail());
+        if(checkUser){
             jdbcTemplate.update(
                     INSERT_USER,
                     user.getId(),
@@ -24,8 +28,8 @@ public class UserRepositoryImpl implements UserRepository{
                     user.getEmail(),
                     user.getPassword());
             return null;
-        } else if (user1.getValidated()) {
-            return user1;
+        } else if (!checkUser){
+            return user;
         }
         jdbcTemplate.update(
                 UPDATE_USER_INFO,
@@ -46,19 +50,29 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public User checkUser(String email) {
-        return jdbcTemplate.queryForObject(CHECK_USER, new UserMapper(), email);
+    public Boolean checkUser(String email) {
+        RowMapper<Boolean> checkUsers = new RowMapper<>() {
+            @Override
+            public Boolean mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getBoolean("check_users");
+            }
+        };
+        return jdbcTemplate.queryForObject(CHECK_USER, checkUsers, email);    }
+
+    @Override
+    public Boolean getByEmail(String email){
+        RowMapper<Boolean> checkUsers = new RowMapper<>() {
+            @Override
+            public Boolean mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getBoolean("check_users");
+            }
+        };
+        return jdbcTemplate.queryForObject(CHECK_USER, checkUsers, email);
     }
 
     @Override
-    public User getByEmail(String email){
-        return jdbcTemplate.queryForObject(GET_USER_BY_EMAIL, new UserMapper(), email);
-    }
-
-    @Override
-    public Boolean checkUserValidate(String email) {
-        return jdbcTemplate.queryForObject(CHANGE_VALIDATED, new UserMapper(), email).getValidated();
-
+    public  Boolean checkUserValidate(String email) {
+        return jdbcTemplate.queryForObject(CHECK_VALIDATED, new UserMapper(), email).getValidated();
     }
 
     @Override

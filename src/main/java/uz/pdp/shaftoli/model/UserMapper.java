@@ -14,6 +14,7 @@ public class UserMapper implements RowMapper<User> {
                 .role(UserRole.valueOf(rs.getString("role")))
                 .email(rs.getString("email"))
                 .password(rs.getString("password"))
+                .validated(Boolean.valueOf(rs.getString("validated")))
                 .build();
         user.setId(UUID.fromString(rs.getString("id")));
         user.setCreatedDate(rs.getTimestamp("created_date"));
