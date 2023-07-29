@@ -53,6 +53,7 @@
               <input type="email" name="email" placeholder="Email" />
             </div>
             <input type="hidden" name="role" value="USER" />
+            <input type="hidden" name="validated" value="false" />
             <div class="input-field">
               <i class="fas fa-lock"></i>
               <input type="password" name="password" placeholder="Password" />
