@@ -1,6 +1,6 @@
 package uz.pdp.shaftoli.service.user;
 
-import uz.pdp.shaftoli.model.UserEntity;
+import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.service.BaseService;
 
 

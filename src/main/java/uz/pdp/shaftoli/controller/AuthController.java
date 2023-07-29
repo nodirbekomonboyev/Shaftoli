@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import uz.pdp.shaftoli.model.UserEntity;
+import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.service.user.UserService;
 
 @Controller

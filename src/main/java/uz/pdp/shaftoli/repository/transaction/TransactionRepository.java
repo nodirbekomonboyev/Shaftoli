@@ -1,6 +1,6 @@
 package uz.pdp.shaftoli.repository.transaction;
 
-import uz.pdp.shaftoli.model.TransactionEntity;
+import uz.pdp.shaftoli.entity.TransactionEntity;
 import uz.pdp.shaftoli.repository.BaseRepository;
 
 import java.util.List;

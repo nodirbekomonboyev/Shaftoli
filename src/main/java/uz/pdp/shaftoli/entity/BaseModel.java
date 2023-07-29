@@ -1,4 +1,4 @@
-package uz.pdp.shaftoli.model;
+package uz.pdp.shaftoli.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
