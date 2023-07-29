@@ -13,7 +13,7 @@ public interface TransactionRepository extends BaseRepository<TransactionEntity>
 
     //String GET_CARD_BY_USERNAME = "select * from card where username = ?;";
     String GET_ALL = "select * from transaction;";
-    String GET_ALL_TRANSACTION = "select * from transaction t where t.sender_id = ? or t.reciever_id = ?;";
+    String GET_ALL_USER_TRANSACTION = "select * from transaction t where t.sender_id = ? or t.reciever_id = ?;";
 
-    List<TransactionEntity> getAllTransaction(UUID id);
+    List<TransactionEntity> getAllBetweenUsersTransaction(UUID id);
 }

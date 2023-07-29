@@ -1,11 +1,12 @@
 package uz.pdp.shaftoli.repository.card;
 
-import uz.pdp.shaftoli.entity.Card;
+
+import uz.pdp.shaftoli.entity.CardEntity;
 import uz.pdp.shaftoli.repository.BaseRepository;
 
 import java.util.UUID;
 
-public interface CardRepository extends BaseRepository<Card> {
+public interface CardRepository extends BaseRepository<CardEntity> {
 //new fileasdfasd
      String INSERT_CARD = "insert into users(id, owner_id, curd_number, password, balance, type, status) " +
         "values(?, ?, ?, ?, ?, ?, ?);";
@@ -13,5 +14,5 @@ public interface CardRepository extends BaseRepository<Card> {
     //String GET_CARD_BY_USERNAME = "select * from card where username = ?;";
     String GET_ALL = "select * from card;";
 
-    Card getById(UUID id);
+    CardEntity getById(UUID id);
 }
