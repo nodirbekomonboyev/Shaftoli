@@ -2,7 +2,7 @@ package uz.pdp.shaftoli.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.shaftoli.model.User;
+import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.repository.user.UserRepository;
 
 
@@ -16,19 +16,19 @@ private final UserRepository userRepository;
 
 
     @Override
-    public User add(User user) {
+    public UserEntity add(UserEntity user) {
         userRepository.save(user);
         return user;
     }
 
     @Override
-    public ArrayList<User> getAll() {
+    public ArrayList<UserEntity> getAll() {
 
         return null;
     }
 
     @Override
-    public User getById() {
+    public UserEntity getById() {
         return null;
     }
 

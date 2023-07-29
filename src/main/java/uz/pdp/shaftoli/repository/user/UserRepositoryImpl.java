@@ -1,71 +1,107 @@
 package uz.pdp.shaftoli.repository.user;
 
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
-import uz.pdp.shaftoli.model.User;
-import uz.pdp.shaftoli.model.UserMapper;
+import uz.pdp.shaftoli.entity.UserEntity;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository{
-    private final JdbcTemplate jdbcTemplate;
+    private final SessionFactory sessionFactory;
+    private final Connection connection;
+
     @Override
-    public User save(User user) {
-        User user1 = checkUser(user.getEmail());
-        user1.setValidated(true);
-        if(user1.getValidated() == null){
-            jdbcTemplate.update(
-                    INSERT_USER,
-                    user.getId(),
-                    user.getName(),
-                    user.getRole(),
-                    user.getEmail(),
-                    user.getPassword());
-            return null;
-        } else if (user1.getValidated()) {
-            return user1;
+    public UserEntity save(UserEntity user) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.persist(user);
+        transaction.commit();
+        session.close();
+        return user;
+
+    }
+
+    @Override
+    public ArrayList<UserEntity> getAll() {
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        List<UserEntity> dataList = session.createQuery(GET_ALL).getResultList();
+        session.getTransaction().commit();
+        session.close();
+        sessionFactory.close();
+        return (ArrayList<UserEntity>) dataList;
+    }
+
+    @Override
+    public UserEntity getById(UUID id) {
+        try(Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            UserEntity user = session.get(UserEntity.class, id);
+            transaction.commit();
+            return user;
         }
-        jdbcTemplate.update(
-                UPDATE_USER_INFO,
-                user.getEmail(),
-                user.getName(),
-                user.getPassword());
-        return null;
     }
 
     @Override
-    public ArrayList<User> getAll() {
-        return (ArrayList<User>) jdbcTemplate.query(GET_ALL, new UserMapper());
+    public UserEntity checkUser(String email) {
+        try(Session session = sessionFactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+            UserEntity user = session.createQuery(CHECK_USER, UserEntity.class)
+                    .setParameter(1,email)
+                    .getSingleResult();
+            transaction.commit();
+            return user;
+        }
     }
 
     @Override
-    public User getById(UUID id) {
-        return jdbcTemplate.queryForObject(GET_USER_BY_ID, new UserMapper(), id);
+    public UserEntity getByEmail(String email){
+        try(Session session = sessionFactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+            UserEntity user =
+                    session.createQuery(GET_USER_BY_EMAIL, UserEntity.class)
+                            .setParameter(1,email)
+                            .getSingleResult();
+            transaction.commit();
+            return user;
+        }
     }
 
     @Override
-    public User checkUser(String email) {
-        return jdbcTemplate.queryForObject(CHECK_USER, new UserMapper(), email);
-    }
-
-    @Override
-    public User getByEmail(String email){
-        return jdbcTemplate.queryForObject(GET_USER_BY_EMAIL, new UserMapper(), email);
-    }
-
-    @Override
-    public Boolean checkUserValidate(String email) {
-        return jdbcTemplate.queryForObject(CHANGE_VALIDATED, new UserMapper(), email).getValidated();
+    public String checkUserValidate(String email) {
+        try(Session session  = sessionFactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+            String result = String.valueOf(session.createQuery(CHECK_VALIDATED, String.class)
+                            .setParameter(1,email)
+                            .getSingleResult());
+            transaction.commit();
+            return result;
+        }
 
     }
 
     @Override
     public void changeValidated(String email) {
-        jdbcTemplate.update(
-                CHANGE_VALIDATED,
-                email);
+        try  {
+            PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_VALIDATED);
+            preparedStatement.setString(1, email);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

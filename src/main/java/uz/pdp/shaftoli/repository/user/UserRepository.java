@@ -1,9 +1,9 @@
 package uz.pdp.shaftoli.repository.user;
 
-import uz.pdp.shaftoli.model.User;
+import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.repository.BaseRepository;
 
-public interface UserRepository extends BaseRepository<User> {
+public interface UserRepository extends BaseRepository<UserEntity> {
     String INSERT_USER = "insert into users(id, name, role, email, password) " +
             "values(?, ?, ?, ?, ?);";
     String GET_USER_BY_ID = "select * from users where id = ?;";
@@ -14,9 +14,9 @@ public interface UserRepository extends BaseRepository<User> {
     String CHECK_USER = "select * from users u where u.email = ?;";
     String UPDATE_USER_INFO = "select * from update_user_info(?,?,?);";
 
-    User checkUser(String email);
-    User getByEmail(String email);
-    Boolean checkUserValidate(String email);
+    UserEntity checkUser(String email);
+    UserEntity getByEmail(String email);
+    String checkUserValidate(String email);
     void changeValidated(String email);
 
 }
