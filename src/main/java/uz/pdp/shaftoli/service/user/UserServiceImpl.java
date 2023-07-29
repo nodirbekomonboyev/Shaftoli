@@ -3,6 +3,7 @@ package uz.pdp.shaftoli.service.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.shaftoli.entity.UserEntity;
+import uz.pdp.shaftoli.repository.UserRepository;
 
 import java.util.ArrayList;
 
@@ -11,11 +12,12 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
+    private final UserRepository userRepository;
 
 
     @Override
     public UserEntity add(UserEntity user) {
-      //  userRepository.save(user);
+        userRepository.save(user);
         return user;
     }
 
