@@ -1,6 +1,6 @@
 package uz.pdp.shaftoli.repository.card;
 
-import uz.pdp.shaftoli.model.Card;
+import uz.pdp.shaftoli.entity.Card;
 import uz.pdp.shaftoli.repository.BaseRepository;
 
 import java.util.UUID;

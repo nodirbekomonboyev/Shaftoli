@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.SessionFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import uz.pdp.shaftoli.model.UserEntity;
+import uz.pdp.shaftoli.entity.UserEntity;
 
 import java.util.ArrayList;
 import java.util.UUID;

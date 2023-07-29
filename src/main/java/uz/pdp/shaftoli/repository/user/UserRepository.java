@@ -1,6 +1,6 @@
 package uz.pdp.shaftoli.repository.user;
 
-import uz.pdp.shaftoli.model.UserEntity;
+import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.repository.BaseRepository;
 
 public interface UserRepository extends BaseRepository<UserEntity> {

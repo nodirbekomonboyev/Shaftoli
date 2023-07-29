@@ -1,6 +1,6 @@
 package uz.pdp.shaftoli.service.transaction;
 
-import uz.pdp.shaftoli.model.TransactionEntity;
+import uz.pdp.shaftoli.entity.TransactionEntity;
 
 import java.util.ArrayList;
 

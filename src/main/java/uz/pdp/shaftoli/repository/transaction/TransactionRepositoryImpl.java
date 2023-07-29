@@ -3,7 +3,7 @@ package uz.pdp.shaftoli.repository.transaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import uz.pdp.shaftoli.model.TransactionEntity;
+import uz.pdp.shaftoli.entity.TransactionEntity;
 
 import java.util.ArrayList;
 import java.util.List;

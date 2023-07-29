@@ -3,6 +3,7 @@ package uz.pdp.shaftoli.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -12,11 +13,10 @@ import org.springframework.web.servlet.view.JstlView;
 
 
 // enable mvc
-@EnableWebMvc
-// makes this class a config class, uses for configuration
 @Configuration
-//
-@ComponentScan(basePackages = "uz")
+@EnableWebMvc
+@ComponentScan(basePackages = "uz.pdp.shaftoli.entity")
+@PropertySource(value = "classpath:application.properties")
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean

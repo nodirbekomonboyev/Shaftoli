@@ -3,7 +3,7 @@ package uz.pdp.shaftoli.repository.card;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import uz.pdp.shaftoli.model.Card;
+import uz.pdp.shaftoli.entity.Card;
 
 import java.util.ArrayList;
 import java.util.UUID;
