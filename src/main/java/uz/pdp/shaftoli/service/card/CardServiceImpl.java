@@ -1,23 +1,24 @@
 package uz.pdp.shaftoli.service.card;
 
-import uz.pdp.shaftoli.entity.Card;
+
+import uz.pdp.shaftoli.entity.CardEntity;
 import uz.pdp.shaftoli.service.BaseService;
 
 import java.util.ArrayList;
 
-public class CardServiceImpl implements BaseService<Card> {
+public class CardServiceImpl implements BaseService<CardEntity> {
     @Override
-    public Card add(Card card) {
+    public CardEntity add(CardEntity card) {
         return null;
     }
 
     @Override
-    public ArrayList<Card> getAll() {
+    public ArrayList<CardEntity> getAll() {
         return null;
     }
 
     @Override
-    public Card getById() {
+    public CardEntity getById() {
         return null;
     }
 }
