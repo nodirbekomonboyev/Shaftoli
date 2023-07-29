@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uz.pdp.shaftoli.model.Card;
-import uz.pdp.shaftoli.model.CardMapper;
 
 import java.util.ArrayList;
 import java.util.UUID;

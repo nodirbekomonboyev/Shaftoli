@@ -1,10 +1,8 @@
 package uz.pdp.shaftoli.service.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import uz.pdp.shaftoli.model.User;
+import uz.pdp.shaftoli.model.UserEntity;
 import uz.pdp.shaftoli.repository.user.UserRepository;
 
 import java.util.ArrayList;
@@ -16,19 +14,19 @@ public class UserServiceImpl implements UserService{
 private final UserRepository userRepository;
 
     @Override
-    public User add(User user) {
+    public UserEntity add(UserEntity user) {
         userRepository.save(user);
         return user;
     }
 
     @Override
-    public ArrayList<User> getAll() {
+    public ArrayList<UserEntity> getAll() {
 
         return null;
     }
 
     @Override
-    public User getById() {
+    public UserEntity getById() {
         return null;
     }
 

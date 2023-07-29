@@ -3,8 +3,8 @@ package uz.pdp.shaftoli.repository.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import uz.pdp.shaftoli.model.User;
-import uz.pdp.shaftoli.model.UserMapper;
+import uz.pdp.shaftoli.model.UserEntity;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -13,8 +13,8 @@ import java.util.UUID;
 public class UserRepositoryImpl implements UserRepository{
     private final JdbcTemplate jdbcTemplate;
     @Override
-    public User save(User user) {
-        User user1 = checkUser(user.getEmail());
+    public UserEntity save(UserEntity user) {
+        UserEntity user1 = checkUser(user.getEmail());
         if(user1 == null){
             jdbcTemplate.update(
                     INSERT_USER,
@@ -36,22 +36,22 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public ArrayList<User> getAll() {
-        return (ArrayList<User>) jdbcTemplate.query(GET_ALL, new UserMapper());
+    public ArrayList<UserEntity> getAll() {
+        return (ArrayList<UserEntity>) jdbcTemplate.query(GET_ALL, new UserMapper());
     }
 
     @Override
-    public User getById(UUID id) {
+    public UserEntity getById(UUID id) {
         return jdbcTemplate.queryForObject(GET_USER_BY_ID, new UserMapper(), id);
     }
 
     @Override
-    public User checkUser(String email) {
+    public UserEntity checkUser(String email) {
         return jdbcTemplate.queryForObject(CHECK_USER, new UserMapper(), email);
     }
 
     @Override
-    public User getByEmail(String email){
+    public UserEntity getByEmail(String email){
         return jdbcTemplate.queryForObject(GET_USER_BY_EMAIL, new UserMapper(), email);
     }
 
