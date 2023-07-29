@@ -15,7 +15,8 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public User save(User user) {
         User user1 = checkUser(user.getEmail());
-        if(user1 == null){
+        user1.setValidated(true);
+        if(user1.getValidated() == null){
             jdbcTemplate.update(
                     INSERT_USER,
                     user.getId(),
