@@ -23,6 +23,7 @@ public class AuthController {
     public String signUp(@ModelAttribute UserEntity user) {
         userService.add(user);
         return "verification";
+
     }
 
     @RequestMapping("/auth/sign-in")

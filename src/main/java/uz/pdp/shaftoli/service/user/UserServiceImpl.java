@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.repository.user.UserRepository;
 
+
 import java.util.ArrayList;
 
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 private final UserRepository userRepository;
+
 
     @Override
     public UserEntity add(UserEntity user) {
@@ -34,4 +36,5 @@ private final UserRepository userRepository;
     public void userValidation(String email) {
         userRepository.changeValidated(email);
     }
+
 }
