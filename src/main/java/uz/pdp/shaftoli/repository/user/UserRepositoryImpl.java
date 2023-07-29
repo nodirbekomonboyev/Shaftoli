@@ -1,6 +1,7 @@
 package uz.pdp.shaftoli.repository.user;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.SessionFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uz.pdp.shaftoli.model.UserEntity;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository{
-    private final JdbcTemplate jdbcTemplate;
+
     @Override
     public UserEntity save(UserEntity user) {
         UserEntity user1 = checkUser(user.getEmail());
