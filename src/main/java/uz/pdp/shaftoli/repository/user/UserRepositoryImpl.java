@@ -1,6 +1,9 @@
 package uz.pdp.shaftoli.repository.user;
 
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,23 +21,22 @@ import java.util.UUID;
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository{
-    private final SessionFactory sessionFactory;
-    private final Connection connection;
 
+    private final SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Transactional
     @Override
     public UserEntity save(UserEntity user) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.persist(user);
-        transaction.commit();
-        session.close();
+        entityManager.persist(user);
         return user;
-
     }
 
     @Override
     public ArrayList<UserEntity> getAll() {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        return null;
+        /*SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -43,7 +45,7 @@ public class UserRepositoryImpl implements UserRepository{
         session.getTransaction().commit();
         session.close();
         sessionFactory.close();
-        return (ArrayList<UserEntity>) dataList;
+        return (ArrayList<UserEntity>) dataList;*/
     }
 
     @Override
@@ -58,50 +60,26 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public UserEntity checkUser(String email) {
-        try(Session session = sessionFactory.openSession()){
-            Transaction transaction = session.beginTransaction();
-            UserEntity user = session.createQuery(CHECK_USER, UserEntity.class)
-                    .setParameter(1,email)
-                    .getSingleResult();
-            transaction.commit();
-            return user;
-        }
+        return null;
     }
 
     @Override
     public UserEntity getByEmail(String email){
-        try(Session session = sessionFactory.openSession()){
-            Transaction transaction = session.beginTransaction();
-            UserEntity user =
-                    session.createQuery(GET_USER_BY_EMAIL, UserEntity.class)
-                            .setParameter(1,email)
-                            .getSingleResult();
-            transaction.commit();
-            return user;
-        }
+       return null;
+        // return entityManager
+       //         .createQuery("select u from users u where email = :email", UserEntity.class)
+       //         .setParameter("username", email)
+       //         .getSingleResult();
     }
 
     @Override
     public String checkUserValidate(String email) {
-        try(Session session  = sessionFactory.openSession()){
-            Transaction transaction = session.beginTransaction();
-            String result = String.valueOf(session.createQuery(CHECK_VALIDATED, String.class)
-                            .setParameter(1,email)
-                            .getSingleResult());
-            transaction.commit();
-            return result;
-        }
+        return null;
 
     }
 
     @Override
     public void changeValidated(String email) {
-        try  {
-            PreparedStatement preparedStatement = connection.prepareStatement(CHANGE_VALIDATED);
-            preparedStatement.setString(1, email);
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        // there is code logic
     }
 }
