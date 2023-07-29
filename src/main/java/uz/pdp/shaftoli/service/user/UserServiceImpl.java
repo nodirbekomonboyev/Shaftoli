@@ -3,7 +3,7 @@ package uz.pdp.shaftoli.service.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.shaftoli.entity.UserEntity;
-import uz.pdp.shaftoli.repository.user.UserRepository;
+import uz.pdp.shaftoli.repository.UserRepository;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,8 @@ import java.util.ArrayList;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
-private final UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
 
     @Override
@@ -33,7 +34,7 @@ private final UserRepository userRepository;
 
     @Override
     public void userValidation(String email) {
-        userRepository.changeValidated(email);
+       // userRepository.changeValidated(email);
     }
 
 }
