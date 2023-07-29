@@ -3,10 +3,7 @@ package uz.pdp.shaftoli.repository.transaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import uz.pdp.shaftoli.model.Card;
-import uz.pdp.shaftoli.model.CardMapper;
-import uz.pdp.shaftoli.model.TransMapper;
-import uz.pdp.shaftoli.model.Transaction;
+import uz.pdp.shaftoli.model.TransactionEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,7 @@ import java.util.UUID;
 public class TransactionRepositoryImpl implements TransactionRepository {
     private final JdbcTemplate jdbcTemplate;
     @Override
-    public Transaction save(Transaction transaction) {
+    public TransactionEntity save(TransactionEntity transaction) {
         jdbcTemplate.update(
                 INSERT_TRANSACTION,
                 transaction.getId(),
@@ -29,17 +26,17 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     }
 
     @Override
-    public ArrayList<Transaction> getAll() {
-        return (ArrayList<Transaction>) jdbcTemplate.query(GET_ALL, new TransMapper());
+    public ArrayList<TransactionEntity> getAll() {
+        return (ArrayList<TransactionEntity>) jdbcTemplate.query(GET_ALL, new TransMapper());
     }
 
     @Override
-    public Transaction getById(UUID id) {
+    public TransactionEntity getById(UUID id) {
         return null;
     }
 
     @Override
-    public List<Transaction> getAllTransaction(UUID id) {
+    public List<TransactionEntity> getAllTransaction(UUID id) {
         return jdbcTemplate.query(GET_ALL_TRANSACTION, new TransMapper(), id);
     }
 }

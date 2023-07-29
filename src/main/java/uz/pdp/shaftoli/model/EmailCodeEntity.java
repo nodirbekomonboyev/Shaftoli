@@ -1,19 +1,23 @@
 package uz.pdp.shaftoli.model;
 
 
+import jakarta.persistence.Entity;
+import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
+@Entity(name = "email_code")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class EmailCode extends BaseModel {
+public class EmailCodeEntity extends BaseModel {
     private String email;
     private String code;
-    private Timestamp limit;
+    @Timestamp
+    private LocalDateTime limit;
 }

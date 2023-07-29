@@ -1,19 +1,22 @@
 package uz.pdp.shaftoli.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+@MappedSuperclass
 @Getter
 @Setter
 public abstract class BaseModel {
-    {
-        this.id = UUID.randomUUID();
-    }
-    protected UUID id;
-    protected Timestamp createdDate;
-    protected Timestamp updatedDate;
+    @Id
+    private UUID id;
+    @CreationTimestamp
+    private LocalDateTime createdDate;
+    @UpdateTimestamp
+    private LocalDateTime updatedDate;
 
 }

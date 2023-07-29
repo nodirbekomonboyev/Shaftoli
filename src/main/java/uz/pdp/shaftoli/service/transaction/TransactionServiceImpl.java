@@ -1,22 +1,22 @@
 package uz.pdp.shaftoli.service.transaction;
 
-import uz.pdp.shaftoli.model.Transaction;
+import uz.pdp.shaftoli.model.TransactionEntity;
 
 import java.util.ArrayList;
 
 public class TransactionServiceImpl implements TransactionService{
     @Override
-    public Transaction add(Transaction transaction) {
+    public TransactionEntity add(TransactionEntity transaction) {
         return null;
     }
 
     @Override
-    public ArrayList<Transaction> getAll() {
+    public ArrayList<TransactionEntity> getAll() {
         return null;
     }
 
     @Override
-    public Transaction getById() {
+    public TransactionEntity getById() {
         return null;
     }
 }
