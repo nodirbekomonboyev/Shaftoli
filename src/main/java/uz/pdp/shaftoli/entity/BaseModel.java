@@ -13,6 +13,7 @@ import java.util.UUID;
 @Setter
 public abstract class BaseModel {
     @Id
+    @GeneratedValue
     private UUID id;
     @CreationTimestamp
     private LocalDateTime createdDate;

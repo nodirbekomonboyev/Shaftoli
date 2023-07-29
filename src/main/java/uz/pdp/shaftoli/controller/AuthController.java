@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.service.user.UserService;
 
+
 @Controller
 @RequiredArgsConstructor
 public class AuthController {
+
     private final UserService userService;
 
     @RequestMapping(value = "/auth/sign-up", method = RequestMethod.POST)
