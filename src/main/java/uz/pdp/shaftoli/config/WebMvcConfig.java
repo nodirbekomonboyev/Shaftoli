@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.JstlView;
 // enable mvc
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "uz.pdp.shaftoli.entity")
+@ComponentScan(basePackages = "uz.pdp")
 @PropertySource(value = "classpath:application.properties")
 public class WebMvcConfig implements WebMvcConfigurer {
 
