@@ -12,6 +12,7 @@ import java.util.Properties;
 
 @Configuration
 @RequiredArgsConstructor
+
 public class BeanConfig {
     private final Environment environment;
     @Bean
