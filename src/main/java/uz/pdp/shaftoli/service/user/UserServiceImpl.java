@@ -17,13 +17,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserEntity add(UserEntity user) {
-        userRepository.save(user);
-        return user;
+        return userRepository.save(user);
     }
 
     @Override
     public ArrayList<UserEntity> getAll() {
-
         return null;
     }
 

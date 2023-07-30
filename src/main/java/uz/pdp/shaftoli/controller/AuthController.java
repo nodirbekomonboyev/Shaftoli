@@ -2,6 +2,7 @@ package uz.pdp.shaftoli.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +18,15 @@ public class AuthController {
     private final UserService userService;
 
     @RequestMapping(value = "/auth/sign-up", method = RequestMethod.POST)
-    public String signUp(@ModelAttribute UserEntity user) {
-        userService.add(user);
-        return "verification";
-
+    public String signUp(
+            @ModelAttribute UserEntity user,
+            Model model
+    ) {
+        model.addAttribute("user", user);
+        if(userService.add(user) == null){
+            return "verification";
+        }
+        return "index";
     }
 
     @RequestMapping(value = "/auth/sign-in", method = RequestMethod.POST)
