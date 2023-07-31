@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import uz.pdp.shaftoli.entity.UserEntity;
-import uz.pdp.shaftoli.service.service.EmailCodeService;
+import uz.pdp.shaftoli.service.emailCode.EmailCodeService;
 import uz.pdp.shaftoli.service.user.UserService;
 
 @Controller
@@ -25,7 +25,7 @@ public class AuthController {
     ) {
         model.addAttribute("user", user);
         if(userService.add(user) == null){
-            String code = emailCodeService.SendAndReturnCodeToEmail(user.getEmail());
+            String code = emailCodeService.sendAndReturnCodeToEmail(user.getEmail());
             System.out.println("code = " + code);
 //            EmailCodeEntity emailCode = new EmailCodeEntity(
 //                    user.getEmail(),
