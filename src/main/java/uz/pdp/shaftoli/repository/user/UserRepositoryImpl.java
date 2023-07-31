@@ -49,21 +49,18 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
 
+    @Transactional
     @Override
     public Boolean checkValidated(String email) {
-        UserEntity singleResult = entityManager.createQuery(GET_BY_EMAIL, UserEntity.class)
-                .setParameter("email", email)
-                .getSingleResult();
+        UserEntity singleResult = findByEmail(email);
         System.out.println(singleResult.getValidated());
         return singleResult.getValidated();
     }
 
+    @Transactional
     @Override
     public UserEntity signIn(String email, String password) {
-        UserEntity singleResult = entityManager.createQuery(GET_BY_EMAIL, UserEntity.class)
-                .setParameter("email", email)
-                .getSingleResult();
-
+        UserEntity singleResult = findByEmail(email);
         if (singleResult.getPassword().equals(password) && singleResult.getValidated()){
             return singleResult;
         }
