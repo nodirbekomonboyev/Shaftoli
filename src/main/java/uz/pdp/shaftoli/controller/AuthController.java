@@ -28,11 +28,7 @@ public class AuthController {
         if(userService.add(user) == null){
             String code = emailCodeService.sendCodeToEmailAndReturn(user.getEmail());
             System.out.println("code = " + code);
-//            EmailCodeEntity emailCode = new EmailCodeEntity(
-//                    user.getEmail(),
-//                    randomCode,
-//                    LocalDateTime.now().plus(5, ChronoUnit.MINUTES));
-
+            model.addAttribute("code", code);
             return "verification";
         }
         return "index";

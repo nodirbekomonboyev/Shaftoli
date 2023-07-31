@@ -26,12 +26,14 @@
               <div class="big-title">
                 <h1>Verification</h1>
               </div>
-              <p class="text">
-                Kiritilgan emailga kod yuborildi. Kodni kiriting emailingizni tasdiqlang!
-              </p>
-                <form action="#" class="sign-up-form">
+              <p class="text">Emailingizga(${user.email}${userEmail}) kod yuborildi. Kodni kiritib emailingizni tasdiqlang!</p>
+              <p style="color: red">${massage}</p>
+                <form action="/auth/sign-up/verification" method="post" class="sign-up-form">
                 <div  class="input-field">
                     <i class="fas fa-lock"></i>
+                    <input type="hidden" name="code" value="${code}">
+                    <input type="hidden" name="userEmail" value="${user.email}">
+                    <input type="hidden" name="userEmail" value="${userEmail}">
                     <input type="text" name="emailCode" placeholder="Enter verification code" />
                 </div>
                 <div style="text-align: left; margin-left : 120px; margin-top: 30px;">
