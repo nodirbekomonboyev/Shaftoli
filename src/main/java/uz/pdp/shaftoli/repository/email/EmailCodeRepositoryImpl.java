@@ -1,4 +1,4 @@
-package uz.pdp.shaftoli.repository;
+package uz.pdp.shaftoli.repository.email;
 
 import org.springframework.stereotype.Repository;
 

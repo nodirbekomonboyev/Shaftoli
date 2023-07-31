@@ -3,7 +3,7 @@ package uz.pdp.shaftoli.service.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.shaftoli.entity.UserEntity;
-import uz.pdp.shaftoli.repository.UserRepository;
+import uz.pdp.shaftoli.repository.user.UserRepository;
 
 import java.util.ArrayList;
 
