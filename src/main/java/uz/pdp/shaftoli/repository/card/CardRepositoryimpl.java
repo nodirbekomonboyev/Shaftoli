@@ -1,4 +1,4 @@
-package uz.pdp.shaftoli.repository;
+package uz.pdp.shaftoli.repository.card;
 
 import org.springframework.stereotype.Repository;
 

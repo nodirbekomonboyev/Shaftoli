@@ -2,6 +2,8 @@ package uz.pdp.shaftoli.service.emailCode;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import uz.pdp.shaftoli.repository.email.EmailCodeRepository;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -11,9 +13,10 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 public class EmailCodeServiceImpl implements EmailCodeService {
+    private final EmailCodeRepository emailCodeRepository;
 
     @Override
-    public String sendAndReturnCodeToEmail(String receiverEmail) {
+    public String sendCodeToEmailAndReturn(String receiverEmail) {
         // Ma'lumotlar
         String emailCode = String.valueOf((new Random()).nextInt(900000) + 100000);
         String email = "shaftolipayment@gmail.com";
@@ -53,6 +56,8 @@ public class EmailCodeServiceImpl implements EmailCodeService {
 
             // Xabarni yuboramiz
             Transport.send(message);
+
+            emailCodeRepository.save(email, emailCode);
 
             System.out.println("Xabar muvaffaqiyatli yuborildi!");
         } catch (MessagingException e) {
