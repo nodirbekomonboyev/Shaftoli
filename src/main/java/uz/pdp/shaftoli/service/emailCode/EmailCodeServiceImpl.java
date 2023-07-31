@@ -13,7 +13,7 @@ import java.util.Random;
 public class EmailCodeServiceImpl implements EmailCodeService {
 
     @Override
-    public String sendAndReturnCodeToEmail(String receiverEmail) {
+    public String sendCodeToEmailAndReturn(String receiverEmail) {
         // Ma'lumotlar
         String emailCode = String.valueOf((new Random()).nextInt(900000) + 100000);
         String email = "shaftolipayment@gmail.com";
