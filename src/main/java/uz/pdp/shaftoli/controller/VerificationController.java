@@ -16,23 +16,24 @@ import uz.pdp.shaftoli.service.emailCode.EmailCodeService;
 public class VerificationController {
     private final EmailCodeService emailCodeService;
     @RequestMapping(value = "/auth/sign-up/verification", method = RequestMethod.POST)
-    public String signUp(
+    public String verification(
             @RequestParam String emailCode,
             @RequestParam String userEmail,
             Model model
     ){
+        model.addAttribute("userEmail", userEmail);
         Boolean verify = emailCodeService.checkEmailAndCode(userEmail, emailCode);
+        System.out.println(verify.toString());
         if(verify) {
             System.out.println("verify = " + verify);
             return "manage-cards";
         }
         String massage = "Ko'dni notog'ri kiritdingiz! Tekshirib qayta kiriting!";
         model.addAttribute("massage", massage);
-        model.addAttribute("userEmail", userEmail);
         return "verification";
     }
 
-    @RequestMapping(value = "/auth/sign-up/verification")
+    @RequestMapping(value = "/verification")
     public String signUp(
             Model model
     ){
