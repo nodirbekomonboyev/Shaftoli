@@ -34,4 +34,10 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
                 .getSingleResult();
 
     }
+
+    @Override
+    public String findCodeByEmail(String userEmail) {
+
+        return userEmail;
+    }
 }

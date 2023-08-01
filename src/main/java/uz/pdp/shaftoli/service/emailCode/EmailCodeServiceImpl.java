@@ -1,17 +1,12 @@
 package uz.pdp.shaftoli.service.emailCode;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.shaftoli.entity.EmailCodeEntity;
 import uz.pdp.shaftoli.repository.email.EmailCodeRepository;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 import java.util.Random;
 
@@ -19,7 +14,6 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class EmailCodeServiceImpl implements EmailCodeService {
     private final EmailCodeRepository emailCodeRepository;
-    private EntityManager entityManager;
 
     @Override
     public String sendCodeToEmailAndReturn(String receiverEmail) {
@@ -74,8 +68,6 @@ public class EmailCodeServiceImpl implements EmailCodeService {
 
     @Override
     public String findCodeByEmail(String userEmail) {
-        return null;
+        return emailCodeRepository.findCodeByEmail(userEmail);
     }
-
-
 }
