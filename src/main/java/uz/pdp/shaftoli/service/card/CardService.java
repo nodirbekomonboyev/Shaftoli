@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface CardService extends BaseService<CardEntity> {
     List<CardEntity> myCards(UserEntity user);
+    Double userCardsBalance(UserEntity user);
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CardServiceImpl implements BaseService<CardEntity> {
+public class CardServiceImpl implements CardService {
     private final CardRepository cardRepository;
     @Override
     public CardEntity add(CardEntity card) {
@@ -30,5 +30,19 @@ public class CardServiceImpl implements BaseService<CardEntity> {
     @Override
     public CardEntity getById() {
         return null;
+    }
+
+    @Override
+    public List<CardEntity> myCards(UserEntity user) {
+        return cardRepository.getUsersCards(user);
+    }
+
+    @Override
+    public Double userCardsBalance(UserEntity user) {
+        Double newBalance = 0D;
+        for (CardEntity myCard : myCards(user)) {
+            newBalance += myCard.getBalance();
+        }
+        return newBalance;
     }
 }
