@@ -23,7 +23,6 @@ public class VerificationController {
             @RequestParam String userEmail,
             @ModelAttribute UserEntity user,
             Model model
-    ){
         model.addAttribute("userEmail", userEmail);
         Boolean verify = emailCodeService.checkEmailAndCode(userEmail, emailCode);
         System.out.println(verify.toString());

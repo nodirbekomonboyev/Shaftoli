@@ -42,9 +42,10 @@ public class UserRepositoryImpl implements UserRepository{
     @Transactional
     @Override
     public UserEntity findByEmail(String email){
-        return entityManager.createQuery(GET_BY_EMAIL, UserEntity.class)
+        UserEntity email1 = entityManager.createQuery(FIND_BY_EMAIL, UserEntity.class)
                 .setParameter("email", email)
                 .getSingleResult();
+        return email1;
     }
 
     @Override
@@ -57,7 +58,8 @@ public class UserRepositoryImpl implements UserRepository{
     @Transactional
     @Override
     public Boolean checkValidated(String email) {
-        return findByEmail(email).getValidated();
+        Boolean validated = findByEmail(email).getValidated();
+        return validated;
     }
 
     @Transactional
