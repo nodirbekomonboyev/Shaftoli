@@ -57,7 +57,7 @@ public class EmailCodeServiceImpl implements EmailCodeService {
             // Xabarni yuboramiz
             Transport.send(message);
 
-            emailCodeRepository.saveEmail(email, emailCode);
+            emailCodeRepository.saveEmail(receiverEmail, emailCode);
 
             System.out.println("Xabar muvaffaqiyatli yuborildi!");
         } catch (MessagingException e) {
