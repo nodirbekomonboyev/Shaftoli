@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import uz.pdp.shaftoli.entity.UserEntity;
+import uz.pdp.shaftoli.repository.user.UserRepository;
 import uz.pdp.shaftoli.service.emailCode.EmailCodeService;
 import uz.pdp.shaftoli.service.user.UserService;
 
@@ -16,6 +17,7 @@ import uz.pdp.shaftoli.service.user.UserService;
 public class AuthController {
 
     private final UserService userService;
+
     private final EmailCodeService emailCodeService;
 
     @RequestMapping(value = "/auth/sign-up", method = RequestMethod.POST)
@@ -32,6 +34,7 @@ public class AuthController {
 //                    user.getEmail(),
 //                    randomCode,
 //                    LocalDateTime.now().plus(5, ChronoUnit.MINUTES));
+
 
             return "verification";
         }

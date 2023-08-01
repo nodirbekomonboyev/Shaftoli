@@ -5,8 +5,12 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import uz.pdp.shaftoli.entity.EmailCodeEntity;
 import uz.pdp.shaftoli.entity.UserEntity;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -14,17 +18,18 @@ public class UserRepositoryImpl implements UserRepository{
     @PersistenceContext
     private EntityManager entityManager;
 
+
     @Transactional
     @Override
-    public UserEntity save(UserEntity user) {
-        UserEntity user1 = null;
+    public UserEntity save(UserEntity userEntity){
+        UserEntity user = null;
         try {
-            user1 = findByEmail(user.getEmail());
+            user = findByEmail(userEntity.getEmail());
         } catch (IllegalArgumentException | NoResultException e){
             entityManager.persist(user);
         }
-        if( user1 != null && user1.getValidated()){
-            return user1;
+        if (user != null && user.getValidated()){
+            return user;
         }
         entityManager.createQuery(UPDATE_USERS)
                 .setParameter("name", user.getName())
@@ -36,10 +41,10 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Transactional
     @Override
-    public UserEntity findByEmail(String email) {
-         return entityManager.createQuery(GET_BY_EMAIL, UserEntity.class)
-                 .setParameter("email", email)
-                 .getSingleResult();
+    public UserEntity findByEmail(String email){
+        return entityManager.createQuery(GET_BY_EMAIL, UserEntity.class)
+                .setParameter("email", email)
+                .getSingleResult();
     }
 
     @Override
@@ -52,9 +57,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Transactional
     @Override
     public Boolean checkValidated(String email) {
-        UserEntity singleResult = findByEmail(email);
-        System.out.println(singleResult.getValidated());
-        return singleResult.getValidated();
+        return findByEmail(email).getValidated();
     }
 
     @Transactional
@@ -66,5 +69,9 @@ public class UserRepositoryImpl implements UserRepository{
         }
         return null;
     }
+
+
+
+
 
 }
