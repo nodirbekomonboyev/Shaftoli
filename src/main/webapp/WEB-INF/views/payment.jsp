@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,25 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page With Light/Dark Mode</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="<c:url value="/styles/menuStyle.css"/>" />
   </head>
   <body>
     <main>
       <div class="big-wrapper light">
-        <img src="./img/shape.png" alt="" class="shape" />
+        <img src="<c:url value="/styles/img/shape.png"/>" alt="" class="shape" />
 
         <header>
           <div class="container">
             <div class="logo">
-              <img src="./img/logo.png" alt="Logo" />
+              <img src="<c:url value="/styles/img/logo.png"/>" alt="Logo" />
               <h1 style="color: #ff7d00">SHAFTOLI</h1>
             </div>
 
             <div class="links">
               <ul>
-                <li><a href="manage-cards.html"><h3>MANAGE CARDS</h3></a></li>
-                <li><a href="history.html"><h3>HISTORY</h3></a></li>
-                <li><a href="p2p.html"><h3>P2P</h3></a></li>
+                <li><a href="manage-cards.jsp"><h3>MANAGE CARDS</h3></a></li>
+                <li><a href="history.jsp"><h3>HISTORY</h3></a></li>
+                <li><a href="p2p.jsp"><h3>P2P</h3></a></li>
 <!--                <li><a href="#" class="btn">Sign up</a></li>-->
               </ul>
             </div>
@@ -76,6 +77,6 @@
     <!-- JavaScript Files -->
 
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-    <script src="./app.js"></script>
+    <script src="../../styles/app2.js"></script>
   </body>
 </html>
