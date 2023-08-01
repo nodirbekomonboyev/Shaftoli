@@ -13,11 +13,11 @@ import java.util.UUID;
 @Setter
 public abstract class BaseModel {
     @Id
-    @GeneratedValue
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected UUID id;
     @CreationTimestamp
-    private LocalDateTime createdDate;
+    protected  LocalDateTime createdDate;
     @UpdateTimestamp
-    private LocalDateTime updatedDate;
+    protected LocalDateTime updatedDate;
 
 }

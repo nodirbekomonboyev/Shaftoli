@@ -16,10 +16,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserEntity extends BaseModel{
     private String name;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
     @Column(unique = true)
     private String email;
+
     @Column(nullable = false)
     private String password;
     private Boolean validated;
