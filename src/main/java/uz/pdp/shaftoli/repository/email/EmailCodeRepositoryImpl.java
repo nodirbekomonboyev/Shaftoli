@@ -22,30 +22,24 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     @Transactional
     @Override
     public void saveEmail(String email, String code) {
-        entityManager.createQuery(UPDATE_EMAIL_CODE)
-                .setParameter("email", email)
-                .setParameter("code", code)
-                .setParameter("limits", LocalDateTime.now().plus(2, ChronoUnit.MINUTES))
-                .executeUpdate();
+        EmailCodeEntity emailCode = new EmailCodeEntity(email, code,LocalDateTime.now().plus(2, ChronoUnit.MINUTES) );
+        entityManager.persist(emailCode);
+
     }
 
 
     @Override
     public Boolean checkEmailAndCode(String userEmail, String code) {
         EmailCodeEntity singleResult = entityManager.createQuery(GET_BY_EMAIL_CODE, EmailCodeEntity.class)
-                .setParameter(1, userEmail)
+                .setParameter("email", userEmail)
                 .getSingleResult();
 
         String code1 = singleResult.getCode();
+
         if (Objects.equals(code1, code)){
-            userRepository.changeValidated(singleResult.getEmail());
+            userRepository.changeValidated(userEmail);
             return true;
         }
         return false;
-
     }
-
-
-
-
 }
