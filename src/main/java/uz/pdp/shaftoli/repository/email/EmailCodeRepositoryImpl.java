@@ -12,6 +12,7 @@ import java.time.temporal.ChronoUnit;
 public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     private EntityManager entityManager;
 
+
     public void save(String email, String code) {
         EmailCodeEntity emailCodeEntity = null;
         try {
@@ -35,9 +36,10 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
 
     }
 
+
     @Override
     public String findCodeByEmail(String userEmail) {
-
-        return userEmail;
+        EmailCodeEntity byEmailCode = getByEmailCode(userEmail);
+        return byEmailCode.getCode();
     }
 }
