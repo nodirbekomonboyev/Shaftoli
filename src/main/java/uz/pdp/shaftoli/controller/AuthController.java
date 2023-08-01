@@ -25,9 +25,8 @@ public class AuthController {
     ) {
         model.addAttribute("user", user);
 
-
-
         if(userService.add(user) == null){
+            System.out.println("user.getEmail() = " + user.getEmail());
             emailCodeService.sendCodeToEmailAndReturn(user.getEmail());
             return "verification";
         }

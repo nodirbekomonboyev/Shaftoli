@@ -28,6 +28,7 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
         EmailCodeEntity emailCode = null;
         try {
             emailCode = findByEmail(email);
+            System.out.println("emailCode = " + emailCode);
             if(email != null){
                 entityManager.createQuery(UPDATE_EMAIL_CODE)
                         .setParameter("email", email)
@@ -40,10 +41,10 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
         }
     }
 
-    @Transactional
+//    @Transactional
     @Override
     public EmailCodeEntity findByEmail(String email) {
-        return  entityManager.createQuery("select c from email_code c where c.email = :email", EmailCodeEntity.class)
+        return entityManager.createQuery(FIND_BY_EMAIL, EmailCodeEntity.class)
                 .setParameter("email", email)
                 .getSingleResult();
     }
@@ -53,13 +54,13 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     @Override
     public Boolean checkEmailAndCode(String userEmail, String code) {
         EmailCodeEntity singleResult = findByEmail(userEmail);
-
         String code1 = singleResult.getCode();
 
-        if (Objects.equals(code1, code) && (singleResult.getLimits().isBefore(LocalDateTime.now()))){
+        if (Objects.equals(code1, code)){
             userRepository.changeValidated(userEmail);
             return true;
         }
         return false;
     }
+
 }

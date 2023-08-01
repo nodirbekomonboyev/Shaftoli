@@ -21,6 +21,8 @@ public class VerificationController {
             @RequestParam String userEmail,
             Model model
     ){
+        System.out.println("emailCode = " + emailCode);
+        System.out.println("userEmail = " + userEmail);
         Boolean verify = emailCodeService.checkEmailAndCode(userEmail, emailCode);
         if(verify) {
            return "manage-cards";
