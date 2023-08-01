@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements UserRepository{
         try {
             user = findByEmail(userEntity.getEmail());
         } catch (IllegalArgumentException | NoResultException e){
-            entityManager.persist(user);
+            entityManager.persist(userEntity);
         }
         if (user != null && user.getValidated()){
             return user;
