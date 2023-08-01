@@ -49,16 +49,12 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
                 .getSingleResult();
     }
 
-
     @Transactional
     @Override
     public Boolean checkEmailAndCode(String userEmail, String code) {
-
-
         EmailCodeEntity result = findByEmail(userEmail);
         boolean isBefore = LocalDateTime.now().isBefore(result.getLimits());
         if (Objects.equals(result.getEmail(), userEmail) && isBefore){
-
             changeValidated(result.getEmail());
             return true;
         }
