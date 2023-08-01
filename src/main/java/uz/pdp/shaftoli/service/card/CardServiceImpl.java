@@ -31,4 +31,18 @@ public class CardServiceImpl implements CardService {
     public CardEntity getById() {
         return null;
     }
+
+    @Override
+    public List<CardEntity> myCards(UserEntity user) {
+        return cardRepository.getUsersCards(user);
+    }
+
+    @Override
+    public Double userCardsBalance(UserEntity user) {
+        Double newBalance = 0D;
+        for (CardEntity myCard : myCards(user)) {
+            newBalance += myCard.getBalance();
+        }
+        return newBalance;
+    }
 }
