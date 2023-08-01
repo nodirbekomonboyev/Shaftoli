@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.shaftoli.entity.EmailCodeEntity;
+import uz.pdp.shaftoli.repository.user.UserRepository;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -15,6 +16,7 @@ import java.util.Objects;
 public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     @PersistenceContext
     private EntityManager entityManager;
+    private UserRepository userRepository;
 
 
     @Transactional
@@ -35,7 +37,11 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
                 .getSingleResult();
 
         String code1 = singleResult.getCode();
-        return Objects.equals(code1, code);
 
+        if (Objects.equals(code1, code)){
+            userRepository.changeValidated(userEmail);
+            return true;
+        }
+        return false;
     }
 }
