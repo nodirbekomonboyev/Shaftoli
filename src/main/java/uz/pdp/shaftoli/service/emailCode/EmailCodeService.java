@@ -5,4 +5,5 @@ public interface EmailCodeService {
     String sendCodeToEmailAndReturn(String receiverEmail);
 
     String findCodeByEmail(String userEmail);
+
 }
