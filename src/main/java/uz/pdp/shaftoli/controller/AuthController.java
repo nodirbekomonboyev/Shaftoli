@@ -34,9 +34,11 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/auth/sign-in", method = RequestMethod.POST)
-    public String signInPage(@RequestParam String email, @RequestParam String password) {
+    public String signInPage(@RequestParam String email, @RequestParam String password, Model model) {
         UserEntity user = userService.signIn(email, password);
         if (user != null ){
+            model.addAttribute("user", user);
+            /////// chundim!!!!
             return "manage-cards";
         }
         return "index";
