@@ -24,7 +24,7 @@ public class MainController {
             Model model
     ){
         return "history";
-    }@RequestMapping(value = "/manage_cards")
+    }@RequestMapping(value = "/manage-cards")
     public String manageCards(
             Model model
     ){

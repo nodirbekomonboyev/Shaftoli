@@ -52,7 +52,7 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
 
     @Transactional
     @Override
-    public Boolean checkEmailAndCode(String userEmail, String code) {
+    public Boolean  checkEmailAndCode(String userEmail, String code) {
 
 
         EmailCodeEntity result = findByEmail(userEmail);
