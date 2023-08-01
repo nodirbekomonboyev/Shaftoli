@@ -9,6 +9,7 @@ import uz.pdp.shaftoli.entity.EmailCodeEntity;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 @Repository
 public class EmailCodeRepositoryImpl implements EmailCodeRepository{
@@ -29,10 +30,13 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
 
 
     @Override
-    public String findCodeByEmail(String userEmail) {
+    public Boolean checkEmailAndCode(String userEmail, String code) {
         EmailCodeEntity singleResult = entityManager.createQuery(GET_BY_EMAIL_CODE, EmailCodeEntity.class)
                 .setParameter(1, userEmail)
                 .getSingleResult();
-        return singleResult.getCode();
+
+        String code1 = singleResult.getCode();
+        return Objects.equals(code1, code);
+
     }
 }

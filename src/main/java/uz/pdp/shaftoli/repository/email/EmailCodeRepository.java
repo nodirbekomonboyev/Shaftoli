@@ -6,5 +6,5 @@ public interface EmailCodeRepository {
     String CREATE_EMAIL_CODE = "insert into email_code(email, code, limit) values(:email,:code,:limit)";
     void saveEmail(String email, String emailCode);
 
-    String findCodeByEmail(String userEmail);
+    Boolean checkEmailAndCode(String userEmail, String code);
 }
