@@ -21,16 +21,13 @@ public class VerificationController {
             @RequestParam String userEmail,
             Model model
     ){
-        String code = emailCodeService.findCodeByEmail(userEmail);
-        System.out.println("emailcode = " + emailCode);
-        System.out.println("code = " + code);
-        if(emailCode.equals(code)) {
+        Boolean verify = emailCodeService.checkEmailAndCode(userEmail, emailCode);
+        if(verify) {
            return "index";
         }
         String massage = "Ko'dni notog'ri kiritdingiz! Tekshirib qayta kiriting!";
         model.addAttribute("massage", massage);
         model.addAttribute("userEmail", userEmail);
-        model.addAttribute("code", code);
         return "verification";
     }
 
