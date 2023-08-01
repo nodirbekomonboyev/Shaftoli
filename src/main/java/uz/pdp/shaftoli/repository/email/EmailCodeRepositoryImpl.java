@@ -21,9 +21,9 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     @Override
     public void saveEmail(String email, String code) {
         entityManager.createQuery(UPDATE_EMAIL_CODE)
-                .setParameter(1, email)
-                .setParameter(2, code)
-                .setParameter(3, LocalDateTime.now().plus(1, ChronoUnit.MINUTES))
+                .setParameter("email", email)
+                .setParameter("code", code)
+                .setParameter("limits", LocalDateTime.now().plus(2, ChronoUnit.MINUTES))
                 .executeUpdate();
     }
 

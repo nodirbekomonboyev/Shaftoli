@@ -22,10 +22,12 @@ public class UserRepositoryImpl implements UserRepository{
     @Transactional
     @Override
     public UserEntity save(UserEntity userEntity){
-
-
-        UserEntity user = findByEmail(userEntity.getEmail());
-
+        UserEntity user = null;
+        try {
+            user = findByEmail(userEntity.getEmail());
+        } catch (IllegalArgumentException | NoResultException e){
+            entityManager.persist(userEntity);
+        }
         if (user != null && user.getValidated()){
             return user;
         }
