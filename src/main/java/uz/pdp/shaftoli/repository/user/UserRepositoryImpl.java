@@ -22,19 +22,17 @@ public class UserRepositoryImpl implements UserRepository{
     @Transactional
     @Override
     public UserEntity save(UserEntity userEntity){
-        UserEntity user = null;
-        try {
-            user = findByEmail(userEntity.getEmail());
-        } catch (IllegalArgumentException | NoResultException e){
-            entityManager.persist(user);
-        }
+
+
+        UserEntity user = findByEmail(userEntity.getEmail());
+
         if (user != null && user.getValidated()){
             return user;
         }
         entityManager.createQuery(UPDATE_USERS)
-                .setParameter("name", user.getName())
-                .setParameter("password", user.getPassword())
-                .setParameter("email", user.getEmail())
+                .setParameter("name", userEntity.getName())
+                .setParameter("password", userEntity.getPassword())
+                .setParameter("email", userEntity.getEmail())
                 .executeUpdate();
         return null;
     }

@@ -24,7 +24,6 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
                 .setParameter(1, email)
                 .setParameter(2, code)
                 .setParameter(3, LocalDateTime.now().plus(1, ChronoUnit.MINUTES))
-                .setParameter("email", email)
                 .executeUpdate();
     }
 
