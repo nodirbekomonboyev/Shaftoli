@@ -28,24 +28,28 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
         EmailCodeEntity emailCode = null;
         try {
             emailCode = findByEmail(email);
+            if(email != null){
+                entityManager.createQuery(UPDATE_EMAIL_CODE)
+                        .setParameter("email", email)
+                        .setParameter("code", code)
+                        .setParameter("limits", LocalDateTime.now().plus(2, ChronoUnit.MINUTES))
+                        .executeUpdate();
+            }
         } catch (IllegalArgumentException | NoResultException e){
             entityManager.persist(emailCodeEntity);
         }
-        entityManager.createQuery(UPDATE_EMAIL_CODE)
-                .setParameter("email", email)
-                .setParameter("code", code)
-                .setParameter("limits", LocalDateTime.now().plus(2, ChronoUnit.MINUTES))
-                .executeUpdate();
-
     }
 
-    private EmailCodeEntity findByEmail(String email) {
-        return  entityManager.createQuery(FIND_BY_EMAIL, EmailCodeEntity.class)
+    @Transactional
+    @Override
+    public EmailCodeEntity findByEmail(String email) {
+        return  entityManager.createQuery("select c from email_code c where c.email = :email", EmailCodeEntity.class)
                 .setParameter("email", email)
                 .getSingleResult();
     }
 
 
+    @Transactional
     @Override
     public Boolean checkEmailAndCode(String userEmail, String code) {
         EmailCodeEntity singleResult = findByEmail(userEmail);
