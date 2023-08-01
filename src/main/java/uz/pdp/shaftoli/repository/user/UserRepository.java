@@ -8,12 +8,11 @@ public interface UserRepository extends BaseRepository<UserEntity> {
     String GET_BY_EMAIL = "select u from users u where u.email = :email";
     String UPDATE_USERS = "update users set name = :name, password = :password where email = :email";
     String GET_ALL = "select u from users u";
-    String CHANGE_VALIDATED = "update users u set validated = true where u.email = ?;";
+
 
     Boolean checkValidated(String email);
 
     UserEntity signIn(String email, String password);
-    void changeValidated(String email);
 
 
 

@@ -3,11 +3,10 @@ package uz.pdp.shaftoli.repository.email;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import lombok.RequiredArgsConstructor;
+import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.shaftoli.entity.EmailCodeEntity;
-import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.repository.user.UserRepository;
 
 import java.time.LocalDateTime;
@@ -15,12 +14,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 @Repository
-@RequiredArgsConstructor
 public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     @PersistenceContext
     private EntityManager entityManager;
-
-    private final UserRepository userRepository;
 
 
     @Transactional
@@ -28,14 +24,16 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     public void saveEmail(String email, String code) {
         EmailCodeEntity emailCodeEntity = new EmailCodeEntity(email, code,LocalDateTime.now().plus(2, ChronoUnit.MINUTES) );
 
-        EmailCodeEntity emailCode;
+        EmailCodeEntity emailCode = null;
         try {
-             emailCode= findByEmail(email);
-            if(emailCode != null){
+            emailCode = findByEmail(email);
+            System.out.println("function findByEmail in save = " + emailCode);
+            if(email != null){
                 entityManager.createQuery(UPDATE_EMAIL_CODE)
                         .setParameter("email", email)
                         .setParameter("code", code)
                         .setParameter("limits", LocalDateTime.now().plus(2, ChronoUnit.MINUTES))
+                        .setParameter("email", email)
                         .executeUpdate();
             }
         } catch (IllegalArgumentException | NoResultException e){
@@ -43,24 +41,28 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
         }
     }
 
-    @Transactional
+//    @Transactional
     @Override
     public EmailCodeEntity findByEmail(String email) {
-        return  entityManager.find(EmailCodeEntity.class, email);
+        return entityManager.createQuery("select c from email_code c where c.email = :email", EmailCodeEntity.class)
+                .setParameter("email", email)
+                .getSingleResult();
     }
-
 
     @Transactional
     @Override
     public Boolean checkEmailAndCode(String userEmail, String code) {
-        EmailCodeEntity singleResult = findByEmail(userEmail);
-
-        String code1 = singleResult.getCode();
-
-        if (Objects.equals(code1, code) && (singleResult.getLimits().equals(LocalDateTime.now()))){
-            userRepository.changeValidated(userEmail);
+        EmailCodeEntity result = findByEmail(userEmail);
+        boolean isBefore = LocalDateTime.now().isBefore(result.getLimits());
+        if (Objects.equals(result.getEmail(), userEmail) && isBefore){
+            changeValidated(result.getEmail());
             return true;
         }
         return false;
+    }
+    public void changeValidated(String email){
+        entityManager.createQuery(CHANGE_VALIDATED)
+                .setParameter("email", email)
+                .executeUpdate();
     }
 }
