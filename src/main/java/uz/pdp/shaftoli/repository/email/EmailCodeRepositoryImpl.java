@@ -38,5 +38,9 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
                 .getSingleResult();
 
     }
+    public String findCodeByEmail(String email){
+        EmailCodeEntity byEmailCode = getByEmailCode(email);
+        return byEmailCode.getCode();
+    }
 
 }
