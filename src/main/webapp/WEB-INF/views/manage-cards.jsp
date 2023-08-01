@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page With Light/Dark Mode</title>
     <link rel="stylesheet" href="<c:url value="/styles/menuStyle.css"/>" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="<c:url value="/styles/swiper-bundle.min.css"/>"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="<c:url value="/styles/card-list-style.css"/>">
   </head>
   <body>
     <main>
@@ -37,30 +42,58 @@
           </div>
         </header>
 
-        <div class="showcase-area">
-          <div class="container">
-<!--
-            <div class="left">
-              <div class="big-title">
-                <h1>Future is here,</h1>
-                <h1>Start Exploring now.</h1>
+          <%--    cards list     --%>
+        <div class="slide-container swiper">
+          <div class="slide-content">
+            <div class="card-wrapper swiper-wrapper">
+              <div class="card swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src="<c:url value="/styles/img/uzcard.jpg"/>" alt="" class="card-img">
+                  </div>
+                </div>
+
+                <div class="card-content">
+                  <h2 class="name">Uzcard</h2>
+                  <p class="description">Balance : 0 so'm</p>
+                </div>
               </div>
-              <p class="text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Delectus eius distinctio odit, magni magnam qui ex perferendis
-                vitae!
-              </p>
-              <div class="cta">
-                <a href="#" class="btn">Get started</a>
+              <div class="card swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src="<c:url value="/styles/img/humo.jpg"/>" alt="" class="card-img">
+                  </div>
+                </div>
+
+                <div class="card-content">
+                  <h2 class="name">Humo</h2>
+                  <p class="description">Balance : 0 so'm</p>
+                </div>
+              </div>
+              <div class="card swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src="<c:url value="/styles/img/visa.jpg"/>" alt="" class="card-img">
+                  </div>
+                </div>
+
+                <div class="card-content">
+                  <h2 class="name">Visa</h2>
+                  <p class="description">Balance : 0 so'm</p>
+                </div>
               </div>
             </div>
--->
-<!--
-            <div class="right">
-              <img src="./img/person.png" alt="Person Image" class="person" />
-            </div>
--->
           </div>
+
+          <div class="swiper-button-next swiper-navBtn"></div>
+          <div class="swiper-button-prev swiper-navBtn"></div>
+          <div class="swiper-pagination"></div>
         </div>
 
         <div class="bottom-area">
@@ -74,7 +107,11 @@
       </div>
     </main>
 
-    <!-- JavaScript Files -->
+    <!-- Swiper JS -->
+    <script src="../../styles/swiper-bundle.min.js"></script>
+
+    <!-- JavaScript -->
+    <script src="../../styles/script.js"></script>
 
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <script src="../../styles/app2.js"></script>
