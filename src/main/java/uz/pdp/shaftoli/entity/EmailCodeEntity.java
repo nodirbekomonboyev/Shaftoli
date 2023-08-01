@@ -22,5 +22,5 @@ public class EmailCodeEntity extends BaseModel {
     private String email;
     private String code;
     @Timestamp
-    private LocalDateTime limit;
+    private LocalDateTime limits;
 }

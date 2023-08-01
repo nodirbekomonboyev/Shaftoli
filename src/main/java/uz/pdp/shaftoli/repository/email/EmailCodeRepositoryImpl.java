@@ -23,7 +23,7 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
         entityManager.createQuery(UPDATE_EMAIL_CODE)
                 .setParameter("email", email)
                 .setParameter("code", code)
-                .setParameter("limit", LocalDateTime.now().plus(2, ChronoUnit.MINUTES))
+                .setParameter("limits", LocalDateTime.now().plus(2, ChronoUnit.MINUTES))
                 .executeUpdate();
     }
 
