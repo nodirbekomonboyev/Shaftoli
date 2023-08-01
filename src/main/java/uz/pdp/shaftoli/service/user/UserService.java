@@ -6,5 +6,6 @@ import uz.pdp.shaftoli.service.BaseService;
 
 public interface UserService extends BaseService<UserEntity> {
     void userValidation(String email);
+    UserEntity signIn(String email, String password);
 
 }
