@@ -9,4 +9,5 @@ import java.util.List;
 public interface CardRepository extends BaseRepository<CardEntity> {
     List<CardEntity> getUsersCards(UserEntity owner);
     CardEntity getCardByNumbers(String numbers);
+    List<CardEntity> getAllCardsUser(UserEntity user);
 }
