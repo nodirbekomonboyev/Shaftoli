@@ -16,4 +16,10 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
                 LocalDateTime.now().plus(5, ChronoUnit.MINUTES));
         // emailCode ni databasega saqlash kerak!!!!
     }
+
+    @Override
+    public String findCodeByEmail(String userEmail) {
+
+        return userEmail;
+    }
 }

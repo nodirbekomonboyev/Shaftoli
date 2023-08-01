@@ -68,6 +68,6 @@ public class EmailCodeServiceImpl implements EmailCodeService {
 
     @Override
     public String findCodeByEmail(String userEmail) {
-        return null;
+        return emailCodeRepository.findCodeByEmail(userEmail);
     }
 }
