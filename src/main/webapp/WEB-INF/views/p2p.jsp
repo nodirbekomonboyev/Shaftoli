@@ -22,9 +22,9 @@
 
             <div class="links">
               <ul>
-                <li><a href="manage-cards.jsp"><h3>MANAGE CARDS</h3></a></li>
-                <li><a href="payment.jsp"><h3>PAYMENT</h3></a></li>
-                <li><a href="history.jsp"><h3>HISTORY</h3></a></li>
+                <li><a href="/manage-cards"><h3>MANAGE CARDS</h3></a></li>
+                <li><a href="/payment"><h3>PAYMENT</h3></a></li>
+                <li><a href="/history"><h3>HISTORY</h3></a></li>
 <!--                <li><a href="#" class="btn">Sign up</a></li>-->
               </ul>
             </div>
