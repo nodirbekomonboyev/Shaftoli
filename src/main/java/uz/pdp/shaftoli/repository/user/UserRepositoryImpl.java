@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements UserRepository{
         try {
             user = findByEmail(userEntity.getEmail());
         } catch (IllegalArgumentException | NoResultException e){
-            entityManager.persist(user);
+            entityManager.persist(userEntity);
         }
         if (user != null && user.getValidated()){
             return user;
@@ -68,6 +68,12 @@ public class UserRepositoryImpl implements UserRepository{
             return singleResult;
         }
         return null;
+    }
+
+    public void changeValidated(String email){
+        entityManager.createQuery(CHANGE_VALIDATED)
+                .setParameter("email", email)
+                .executeUpdate();
     }
 
 
