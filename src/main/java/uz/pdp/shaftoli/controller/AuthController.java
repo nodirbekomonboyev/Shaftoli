@@ -25,6 +25,8 @@ public class AuthController {
     ) {
         model.addAttribute("user", user);
 
+
+
         if(userService.add(user) == null){
             String code = emailCodeService.sendCodeToEmailAndReturn(user.getEmail());
             System.out.println("code = " + code);

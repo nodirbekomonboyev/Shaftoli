@@ -6,6 +6,7 @@ import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.repository.user.UserRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -21,8 +22,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ArrayList<UserEntity> getAll() {
-        return null;
+    public List<UserEntity> getAll() {
+        return userRepository.getAll();
     }
 
     @Override
