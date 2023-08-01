@@ -57,7 +57,7 @@ public class EmailCodeServiceImpl implements EmailCodeService {
             // Xabarni yuboramiz
             Transport.send(message);
 
-            emailCodeRepository.saveEmail(email, emailCode);
+            emailCodeRepository.saveEmail(receiverEmail, emailCode);
 
             System.out.println("Xabar muvaffaqiyatli yuborildi!");
         } catch (MessagingException e) {
@@ -67,6 +67,8 @@ public class EmailCodeServiceImpl implements EmailCodeService {
 
     @Override
     public Boolean checkEmailAndCode(String userEmail, String emailCode) {
+        System.out.println("userEmail = " + userEmail);
+        System.out.println("emailCode = " + emailCode);
         return emailCodeRepository.checkEmailAndCode(userEmail, emailCode);
     }
 

@@ -70,6 +70,12 @@ public class UserRepositoryImpl implements UserRepository{
         return null;
     }
 
+    public void changeValidated(String email){
+        entityManager.createQuery(CHANGE_VALIDATED)
+                .setParameter("email", email)
+                .executeUpdate();
+    }
+
 
 
 
