@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.shaftoli.entity.EmailCodeEntity;
+import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.repository.user.UserRepository;
 
 import java.time.LocalDateTime;
@@ -22,21 +23,36 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     @Transactional
     @Override
     public void saveEmail(String email, String code) {
-        EmailCodeEntity emailCode = new EmailCodeEntity(email, code,LocalDateTime.now().plus(2, ChronoUnit.MINUTES) );
-        entityManager.persist(emailCode);
+        EmailCodeEntity emailCodeEntity = new EmailCodeEntity(email, code,LocalDateTime.now().plus(2, ChronoUnit.MINUTES) );
 
+        EmailCodeEntity emailCode = null;
+        try {
+            emailCode = findByEmail(email);
+        } catch (IllegalArgumentException | NoResultException e){
+            entityManager.persist(emailCodeEntity);
+        }
+        entityManager.createQuery(UPDATE_EMAIL_CODE)
+                .setParameter("email", email)
+                .setParameter("code", code)
+                .setParameter("limits", LocalDateTime.now().plus(2, ChronoUnit.MINUTES))
+                .executeUpdate();
+
+    }
+
+    private EmailCodeEntity findByEmail(String email) {
+        return  entityManager.createQuery(FIND_BY_EMAIL, EmailCodeEntity.class)
+                .setParameter("email", email)
+                .getSingleResult();
     }
 
 
     @Override
     public Boolean checkEmailAndCode(String userEmail, String code) {
-        EmailCodeEntity singleResult = entityManager.createQuery(GET_BY_EMAIL_CODE, EmailCodeEntity.class)
-                .setParameter("email", userEmail)
-                .getSingleResult();
+        EmailCodeEntity singleResult = findByEmail(userEmail);
 
         String code1 = singleResult.getCode();
 
-        if (Objects.equals(code1, code)){
+        if (Objects.equals(code1, code) && (singleResult.getLimits().isBefore(LocalDateTime.now()))){
             userRepository.changeValidated(userEmail);
             return true;
         }
