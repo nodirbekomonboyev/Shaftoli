@@ -25,7 +25,8 @@ public class VerificationController {
         System.out.println("userEmail = " + userEmail);
         Boolean verify = emailCodeService.checkEmailAndCode(userEmail, emailCode);
         if(verify) {
-           return "manage-cards";
+            System.out.println("verify = " + verify);
+            return "manage-cards";
         }
         String massage = "Ko'dni notog'ri kiritdingiz! Tekshirib qayta kiriting!";
         model.addAttribute("massage", massage);

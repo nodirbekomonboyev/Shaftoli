@@ -2,7 +2,6 @@ package uz.pdp.shaftoli.service.emailCode;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.shaftoli.repository.email.EmailCodeRepository;
 
 import javax.mail.*;
@@ -66,10 +65,10 @@ public class EmailCodeServiceImpl implements EmailCodeService {
         }
     }
 
-    @Transactional
     @Override
     public Boolean checkEmailAndCode(String userEmail, String emailCode) {
+        System.out.println("userEmail in Service to check email and code = " + userEmail);
+        System.out.println("emailCode = " + emailCode);
         return emailCodeRepository.checkEmailAndCode(userEmail, emailCode);
     }
-
 }

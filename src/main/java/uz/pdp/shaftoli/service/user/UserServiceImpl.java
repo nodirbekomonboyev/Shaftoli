@@ -16,6 +16,7 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
 
 
+
     @Override
     public UserEntity add(UserEntity user) {
         return userRepository.save(user);
@@ -34,6 +35,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public void userValidation(String email) {
        // userRepository.changeValidated(email);
+    }
+
+    @Override
+    public UserEntity signIn(String email, String password) {
+        return userRepository.signIn(email,password);
     }
 
 }

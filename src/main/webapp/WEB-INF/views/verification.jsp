@@ -32,7 +32,7 @@
                 <div  class="input-field">
                     <i class="fas fa-lock"></i>
                     <input type="hidden" name="userEmail" value="${user.email}">
-<%--                    <input type="hidden" name="userEmail" value="${userEmail}">--%>
+                    <%--<input type="hidden" name="userEmail" value="${userEmail}">--%>
                     <input type="text" name="emailCode" placeholder="Enter verification code" />
                 </div>
                 <div style="text-align: left; margin-left : 120px; margin-top: 30px;">
