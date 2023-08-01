@@ -67,7 +67,7 @@ public class EmailCodeServiceImpl implements EmailCodeService {
 
     @Override
     public Boolean checkEmailAndCode(String userEmail, String emailCode) {
-        System.out.println("userEmail = " + userEmail);
+        System.out.println("userEmail in Service to check email and code = " + userEmail);
         System.out.println("emailCode = " + emailCode);
         return emailCodeRepository.checkEmailAndCode(userEmail, emailCode);
     }
