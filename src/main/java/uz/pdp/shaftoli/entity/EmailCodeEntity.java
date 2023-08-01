@@ -1,7 +1,9 @@
 package uz.pdp.shaftoli.entity;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.UniqueConstraint;
 import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class EmailCodeEntity extends BaseModel {
+    @Column(unique = true)
     private String email;
     private String code;
     @Timestamp
