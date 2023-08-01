@@ -70,4 +70,5 @@ public class EmailCodeServiceImpl implements EmailCodeService {
     public String findCodeByEmail(String userEmail) {
         return emailCodeRepository.findCodeByEmail(userEmail);
     }
+
 }
