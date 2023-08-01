@@ -23,7 +23,7 @@ public class VerificationController {
     ){
         Boolean verify = emailCodeService.checkEmailAndCode(userEmail, emailCode);
         if(verify) {
-           return "index";
+           return "manage-cards";
         }
         String massage = "Ko'dni notog'ri kiritdingiz! Tekshirib qayta kiriting!";
         model.addAttribute("massage", massage);
