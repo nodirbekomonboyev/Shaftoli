@@ -51,6 +51,7 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
 
     @Transactional
     @Override
+
     public Boolean checkEmailAndCode(String userEmail, String code) {
         EmailCodeEntity result = findByEmail(userEmail);
         boolean isBefore = LocalDateTime.now().isBefore(result.getLimits());
