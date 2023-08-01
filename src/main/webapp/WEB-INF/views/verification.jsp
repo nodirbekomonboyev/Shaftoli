@@ -31,7 +31,6 @@
                 <form action="/auth/sign-up/verification" method="post" class="sign-up-form">
                 <div  class="input-field">
                     <i class="fas fa-lock"></i>
-                    <input type="hidden" name="code" value="${code}">
                     <input type="hidden" name="userEmail" value="${user.email}">
                     <input type="hidden" name="userEmail" value="${userEmail}">
                     <input type="text" name="emailCode" placeholder="Enter verification code" />

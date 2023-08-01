@@ -9,17 +9,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import uz.pdp.shaftoli.entity.EmailCodeEntity;
 import uz.pdp.shaftoli.entity.UserEntity;
+import uz.pdp.shaftoli.service.emailCode.EmailCodeService;
 
 @Controller
 @RequiredArgsConstructor
 public class VerificationController {
+    private final EmailCodeService emailCodeService;
     @RequestMapping(value = "/auth/sign-up/verification", method = RequestMethod.POST)
     public String signUp(
             @RequestParam String emailCode,
-            @RequestParam String code,
             @RequestParam String userEmail,
             Model model
     ){
+        String code = emailCodeService.findCodeByEmail(userEmail);
         System.out.println("emailcode = " + emailCode);
         System.out.println("code = " + code);
         if(emailCode.equals(code)) {
