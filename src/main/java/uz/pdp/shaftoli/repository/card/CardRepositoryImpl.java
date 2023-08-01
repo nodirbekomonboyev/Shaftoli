@@ -5,7 +5,9 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import uz.pdp.shaftoli.entity.CardEntity;
+import uz.pdp.shaftoli.entity.CardType;
 import uz.pdp.shaftoli.entity.UserEntity;
+import uz.pdp.shaftoli.repository.user.UserRepository;
 
 import java.util.List;
 
@@ -17,13 +19,9 @@ import java.util.List;
 public class CardRepositoryImpl implements CardRepository{
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public CardEntity save(CardEntity cardEntity) {
-
-
-
-
-
         CardEntity card = null;
         try{
         card = getCardByNumbers(cardEntity.getCardNumber());
@@ -33,6 +31,8 @@ public class CardRepositoryImpl implements CardRepository{
         }
         return null;
     }
+
+
 
     @Override
     public CardEntity findByEmail(String email) {
@@ -54,6 +54,13 @@ public class CardRepositoryImpl implements CardRepository{
     @Override
     public CardEntity getCardByNumbers(String numbers) {
         return entityManager.find(CardEntity.class, numbers);
+    }
+
+    @Override
+    public List<CardEntity> getAllCardsUser(UserEntity user) {
+        return entityManager.createQuery("select c from card c where c.owner = owner", CardEntity.class)
+                .setParameter("owner",user)
+                .getResultList();
     }
 
 
