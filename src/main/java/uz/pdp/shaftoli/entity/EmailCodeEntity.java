@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class EmailCodeEntity extends BaseModel {
+    @Column(unique = true)
     private String email;
     private String code;
     @Timestamp
