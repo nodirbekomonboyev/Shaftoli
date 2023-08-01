@@ -43,5 +43,6 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     public String findCodeByEmail(String userEmail) {
         EmailCodeEntity byEmailCode = getByEmailCode(userEmail);
         return byEmailCode.getCode();
+        // new changes
     }
 }
