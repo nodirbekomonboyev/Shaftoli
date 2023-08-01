@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CardServiceImpl implements BaseService<CardEntity> {
+public class CardServiceImpl implements CardService {
     private final CardRepository cardRepository;
     @Override
     public CardEntity add(CardEntity card) {
