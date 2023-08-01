@@ -9,23 +9,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import uz.pdp.shaftoli.entity.EmailCodeEntity;
 import uz.pdp.shaftoli.entity.UserEntity;
+import uz.pdp.shaftoli.service.card.CardService;
 import uz.pdp.shaftoli.service.emailCode.EmailCodeService;
 
 @Controller
 @RequiredArgsConstructor
 public class VerificationController {
     private final EmailCodeService emailCodeService;
+    private final CardService cardService;
     @RequestMapping(value = "/auth/sign-up/verification", method = RequestMethod.POST)
     public String verification(
             @RequestParam String emailCode,
             @RequestParam String userEmail,
+            @ModelAttribute UserEntity user,
             Model model
+    )
+    {
         model.addAttribute("userEmail", userEmail);
         Boolean verify = emailCodeService.checkEmailAndCode(userEmail, emailCode);
         System.out.println(verify.toString());
         if(verify) {
-            System.out.println("verify = " + verify);
-            return "manage-cards";
+            cardService.myCards(user);
+           return "manage-cards";
         }
         String massage = "Ko'dni notog'ri kiritdingiz! Tekshirib qayta kiriting!";
         model.addAttribute("massage", massage);
