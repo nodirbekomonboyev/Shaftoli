@@ -2,7 +2,7 @@ package uz.pdp.shaftoli.service.emailCode;
 
 public interface EmailCodeService {
 
-    String sendCodeToEmailAndReturn(String receiverEmail);
+    void sendCodeToEmailAndReturn(String receiverEmail);
 
-    String findCodeByEmail(String userEmail);
+    Boolean checkEmailAndCode(String userEmail, String emailCode);
 }

@@ -16,7 +16,7 @@ public class EmailCodeServiceImpl implements EmailCodeService {
     private final EmailCodeRepository emailCodeRepository;
 
     @Override
-    public String sendCodeToEmailAndReturn(String receiverEmail) {
+    public void sendCodeToEmailAndReturn(String receiverEmail) {
         // Ma'lumotlar
         String emailCode = String.valueOf((new Random()).nextInt(900000) + 100000);
         String email = "shaftolipayment@gmail.com";
@@ -63,11 +63,10 @@ public class EmailCodeServiceImpl implements EmailCodeService {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-        return emailCode;
     }
 
     @Override
-    public String findCodeByEmail(String userEmail) {
-        return emailCodeRepository.findCodeByEmail(userEmail);
+    public Boolean checkEmailAndCode(String userEmail, String emailCode) {
+        return emailCodeRepository.checkEmailAndCode(userEmail, emailCode);
     }
 }
