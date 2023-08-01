@@ -2,6 +2,7 @@ package uz.pdp.shaftoli.repository.email;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import uz.pdp.shaftoli.entity.EmailCodeEntity;
 
@@ -10,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 
 @Repository
 public class EmailCodeRepositoryImpl implements EmailCodeRepository{
+    @PersistenceContext
     private EntityManager entityManager;
 
 
@@ -41,5 +43,6 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
     public String findCodeByEmail(String userEmail) {
         EmailCodeEntity byEmailCode = getByEmailCode(userEmail);
         return byEmailCode.getCode();
+        // new changes
     }
 }
