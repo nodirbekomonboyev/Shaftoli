@@ -65,4 +65,9 @@ public class EmailCodeServiceImpl implements EmailCodeService {
         }
         return emailCode;
     }
+
+    @Override
+    public String findCodeByEmail(String userEmail) {
+        return null;
+    }
 }
