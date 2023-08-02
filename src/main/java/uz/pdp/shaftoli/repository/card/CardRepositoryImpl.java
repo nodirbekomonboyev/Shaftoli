@@ -52,9 +52,14 @@ public class CardRepositoryImpl implements CardRepository{
 
     @Override
     public CardEntity getCardByNumbers(String numbers) {
+        try{
         return entityManager.createQuery("select c from card c where c.cardNumber = :number", CardEntity.class)
                 .setParameter("number", numbers)
                 .getSingleResult();
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
 
 
