@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.shaftoli.entity.CardEntity;
 import uz.pdp.shaftoli.entity.TransactionEntity;
 import uz.pdp.shaftoli.entity.UserEntity;
@@ -20,6 +21,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
         return null;
     }
 
+    @Transactional
     @Override
     public String saveTransaction(TransactionEntity trans) {
         CardEntity senderCard = getCardByNumber(String.valueOf(trans.getSenderId()));
@@ -78,11 +80,13 @@ public class TransactionRepositoryImpl implements TransactionRepository{
             return null;
         }
     }
+
+    @Transactional
     public void updateCard(CardEntity card){
-        entityManager.createQuery("update card c set balance = :balance where c.id = :id", CardEntity.class)
-                .setParameter("balance", card.getBalance())
+        entityManager.createQuery("update card c set c.balance = :balance where c.id = :id")
                 .setParameter("id", card.getId())
-                .getSingleResult();
+                .setParameter("balance", card.getBalance())
+                .executeUpdate();
     }
 
 
