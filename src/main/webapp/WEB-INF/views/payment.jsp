@@ -47,12 +47,12 @@
 
                 <div class="input-box">
                   <label>Card number</label>
-                  <input type="text" name="cardNumber" placeholder="Enter receiver card number" required />
+                  <input type="text" name="receiverId" placeholder="Enter receiver card number" required />
                 </div>
 
                 <div class="input-box">
                   <label>Your card</label>
-                  <input type="text" name="type" placeholder="Select a card type" list="categories">
+                  <input type="text" name="senderId" placeholder="Select a card type" list="categories">
                   <datalist id="categories">
                       <c:forEach items="${cards}" var="card">
                         <option value="${card.cardNumber}">
@@ -64,8 +64,6 @@
                   <label>Summa</label>
                   <input type="number" name="amount" placeholder="Enter amount" required />
                 </div>
-
-
 
                 <button>Submit</button>
               </form>
