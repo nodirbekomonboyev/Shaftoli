@@ -22,7 +22,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
     public TransactionEntity saveTransaction(String senderId, String recieverId, Double amount){
         CardEntity senderCard = getCardById(senderId);
         CardEntity recieverCard = getCardById(recieverId);
-        if (senderCard.getBalance() < amount){
+        if (senderCard.getBalance() < amount + amount * 0.1){
             return null;
         }
         senderCard.setBalance(senderCard.getBalance() - amount - amount * 0.1);
