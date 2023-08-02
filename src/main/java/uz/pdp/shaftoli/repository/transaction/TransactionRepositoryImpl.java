@@ -70,7 +70,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
 
     public CardEntity getCardById(String id) {
         return entityManager.createQuery("select c from card c where c.id = :id", CardEntity.class)
-                .setParameter("id", id)
+                .setParameter("id",  UUID.fromString(id))
                 .getSingleResult();
     }
     public void updateCard(CardEntity card){
