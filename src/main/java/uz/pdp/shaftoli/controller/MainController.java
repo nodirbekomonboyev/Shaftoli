@@ -25,7 +25,7 @@ public class MainController {
     private final TransactionService transactionService;
 
 
-    @RequestMapping(value = "/payment/{owner}")
+    @RequestMapping(value = "/payment/{owner}", method = RequestMethod.GET)
     public String payment(
             @PathVariable UUID owner,
             Model model
@@ -54,27 +54,43 @@ public class MainController {
         return "payment";
     }
 
-    @RequestMapping(value = "/p2p")
-    public String p2p(
+    @RequestMapping(value = "/p2p/{owner}", method = RequestMethod.GET)
+    public String getP2p(
+            @PathVariable UUID owner,
             Model model
     ){
+        model.addAttribute("owner", owner);
         return "p2p";
     }
 
-    @RequestMapping(value = "/history")
-    public String history(
+    @RequestMapping(value = "/p2p/{owner}", method = RequestMethod.POST)
+    public String postP2p(
+            @PathVariable UUID owner,
+            @RequestParam String firstDate,
+            @RequestParam String lastDate,
             Model model
     ){
+        model.addAttribute("owner", owner);
+        return "p2p";
+    }
+
+    @RequestMapping(value = "/history/{owner}")
+    public String history(
+            @PathVariable UUID owner,
+            Model model
+    ){
+        model.addAttribute("owner", owner);
         return "history";
     }
 
-    @RequestMapping(value = "/manage-cards")
+    @RequestMapping(value = "/manage-cards/{owner}")
     public String getManageCards(
-            @ModelAttribute List<CardEntity> cards,
-            @ModelAttribute UserEntity user,
-            @RequestParam Double balance,
+            @PathVariable UUID owner,
             Model model
     ){
+        UserEntity user = userService.finById(owner);
+        List<CardEntity> cards = cardService.myCards(user);
+        Double balance = cardService.userCardsBalance(user);
         model.addAttribute("user", user);
         model.addAttribute("cards", cards);
         model.addAttribute("balance", balance);
@@ -89,16 +105,14 @@ public class MainController {
         UserEntity user = userService.finById(owner);
         System.out.println("user = " + user);
         System.out.println("owner = " + owner);
-
-        model.addAttribute("user", user);
         model.addAttribute("owner", owner);
         return "add-card";
     }
 
-    @RequestMapping(value = "/manage-cards/add-card", method = RequestMethod.POST)
+    @RequestMapping(value = "/manage-cards/add-card/{owner}", method = RequestMethod.POST)
     public String addCard(
             @ModelAttribute CardEntity card,
-            @RequestParam UUID owner,
+            @PathVariable UUID owner,
             Model model
     ){
         UserEntity user = userService.finById(owner);
