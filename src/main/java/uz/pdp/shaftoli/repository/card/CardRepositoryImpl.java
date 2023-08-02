@@ -6,10 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.shaftoli.entity.CardEntity;
-import uz.pdp.shaftoli.entity.CardType;
 import uz.pdp.shaftoli.entity.UserEntity;
-import uz.pdp.shaftoli.repository.user.UserRepository;
-
 import java.util.List;
 
 
