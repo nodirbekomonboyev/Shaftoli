@@ -22,10 +22,10 @@ public class TransactionRepositoryImpl implements TransactionRepository{
 
     @Override
     public String saveTransaction(TransactionEntity trans) {
-        CardEntity senderCard = getCardById(String.valueOf(trans.getSenderId()));
+        CardEntity senderCard = getCardByNumber(String.valueOf(trans.getSenderId()));
         CardEntity receiverCard;
         try{
-            receiverCard = getCardById(String.valueOf(trans.getReceiverId()));
+            receiverCard = getCardByNumber(String.valueOf(trans.getReceiverId()));
         }
         catch (NoResultException e){
             return "Card not found";
@@ -68,10 +68,15 @@ public class TransactionRepositoryImpl implements TransactionRepository{
         return null;
     }
 
-    public CardEntity getCardById(String id) {
-        return entityManager.createQuery("select c from card c where c.id = :id", CardEntity.class)
-                .setParameter("id",  UUID.fromString(id))
-                .getSingleResult();
+    public CardEntity getCardByNumber(String number) {
+        try{
+            return entityManager.createQuery("select c from card c where c.cardNumber = :number", CardEntity.class)
+                    .setParameter("number", number)
+                    .getSingleResult();
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
     public void updateCard(CardEntity card){
         entityManager.createQuery("update card set balance = :balance where id = :id", CardEntity.class)
