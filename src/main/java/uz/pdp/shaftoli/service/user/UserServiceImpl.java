@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserEntity finById(UUID userId) {
-        userRepository.findById(userId);
+        return userRepository.findById(userId);
     }
 
 }
