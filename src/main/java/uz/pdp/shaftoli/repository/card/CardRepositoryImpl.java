@@ -53,7 +53,7 @@ public class CardRepositoryImpl implements CardRepository{
     @Override
     public CardEntity getCardByNumbers(String numbers) {
         try{
-        return entityManager.createQuery("select c from card c where c.cardNumber = :number", CardEntity.class)
+        return entityManager.createQuery("select c from card c where c.cardNumber = :numbers", CardEntity.class)
                 .setParameter("number", numbers)
                 .getSingleResult();
         }

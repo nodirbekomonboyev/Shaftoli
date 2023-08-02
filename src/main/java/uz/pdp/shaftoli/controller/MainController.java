@@ -102,8 +102,8 @@ public class MainController {
             Model model
     ){
         UserEntity user = userService.finById(owner);
-        System.out.println("user2" + user);
-        System.out.println("findUser" + user);
+        System.out.println("findUser = " + user);
+        System.out.println("card = " + card);
         cardService.add(card);
         model.addAttribute("user", user);
         List<CardEntity> cards = cardService.myCards(user);
