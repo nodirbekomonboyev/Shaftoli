@@ -15,7 +15,8 @@
 
         <div class="input-box">
           <label>Card Number</label>
-          <input type="hidden" name="owner" value="${userId}">
+          <input type="hidden" name="user" value="${user}">
+          <input type="hidden" name="owner" value="${owner}">
           <input type="text" name="cardNumber" placeholder="Enter card number" required />
         </div>
 

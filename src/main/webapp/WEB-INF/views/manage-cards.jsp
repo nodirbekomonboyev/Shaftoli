@@ -48,9 +48,10 @@
                       width: 50%;
                       padding: 30px 10px;
                       margin-left: 25%;
-                      text-align: center;">
+                      text-align: center;
+                      ">
             <h3 style="color: #ff7d00">Balance</h3>
-            <h2>${balance} so'm</h2>
+            <h2 style="color: #ff7d00">${balance} so'm</h2>
           </div>
         </div>
 
@@ -88,7 +89,6 @@
                   <form action="/manage-cards/add-card">
                     <input type="hidden" name="user" value="${user}">
                     <input type="hidden" name="owner" value="${user.id}">
-                    <h1>${user}</h1>
                     <button class="button" >Add Card</button>
                   </form>
                 </div>

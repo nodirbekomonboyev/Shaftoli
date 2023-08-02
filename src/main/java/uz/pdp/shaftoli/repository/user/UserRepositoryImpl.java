@@ -58,7 +58,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public UserEntity findById(UUID userId) {
-        return entityManager.createQuery("select u from users u where u.id = id", UserEntity.class)
+        return entityManager.createQuery("select u from users u where u.id = :id", UserEntity.class)
                 .setParameter("id", userId)
                 .getSingleResult();
     }
