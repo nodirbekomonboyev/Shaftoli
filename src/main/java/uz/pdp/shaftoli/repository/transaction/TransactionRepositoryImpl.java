@@ -21,14 +21,13 @@ public class TransactionRepositoryImpl implements TransactionRepository{
         return null;
     }
 
+    @Transactional
     @Override
     public String saveTransaction(TransactionEntity trans) {
         CardEntity senderCard = getCardByNumber(String.valueOf(trans.getSenderId()));
-        System.out.println("senderCard = " + senderCard);
         CardEntity receiverCard;
         try{
             receiverCard = getCardByNumber(String.valueOf(trans.getReceiverId()));
-            System.out.println("receiverCard = " + receiverCard);
         }
         catch (NoResultException e){
             return "Card not found";
@@ -81,6 +80,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
             return null;
         }
     }
+
     @Transactional
     public void updateCard(CardEntity card){
         entityManager.createQuery("update card c set c.balance = :balance where c.id = :id")
