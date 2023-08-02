@@ -28,10 +28,10 @@ public class TransactionRepositoryImpl implements TransactionRepository{
             recieverCard = getCardById(String.valueOf(trans.getReceiverId()));
         }
         catch (NoResultException e){
-            return "userNotFound";
+            return "Card not found";
         }
         if (senderCard.getBalance() < trans.getAmount() + trans.getAmount() * 0.01){
-            return "don'tHaveEnoughtMoney";
+            return "Sorry! don't have enough money";
         }
         senderCard.setBalance(senderCard.getBalance() - trans.getAmount() - trans.getAmount() * 0.01);
         recieverCard.setBalance(recieverCard.getBalance() + trans.getAmount());
@@ -48,7 +48,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
         //jgfyhtfytfyf
         //this is comment
         entityManager.persist(transactionEntity);
-        return "success";
+        return "Successful!!!";
     }
 
     public List<TransactionEntity> getByOwnerId (UUID id){
