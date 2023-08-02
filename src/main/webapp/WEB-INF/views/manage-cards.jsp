@@ -27,7 +27,7 @@
 
             <div class="links">
               <ul>
-                <li><a href="/payment"><h3>PAYMENT</h3></a></li>
+                <li><a href="/payment/${user.id}"><h3>PAYMENT</h3></a></li>
                 <li><a href="/history"><h3>HISTORY</h3></a></li>
                 <li><a href="/p2p"><h3>P2P</h3></a></li>
 <!--                <li><a href="#" class="btn">Sign up</a></li>-->

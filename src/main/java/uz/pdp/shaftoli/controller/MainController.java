@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shaftoli.entity.CardEntity;
 import uz.pdp.shaftoli.entity.CardType;
+import uz.pdp.shaftoli.entity.TransactionEntity;
 import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.service.card.CardService;
 import uz.pdp.shaftoli.service.user.UserService;
@@ -22,10 +23,27 @@ public class MainController {
     private final UserService userService;
 
 
-    @RequestMapping(value = "/payment")
+    @RequestMapping(value = "/payment/{owner}")
     public String payment(
+            @PathVariable UUID owner,
             Model model
     ){
+        System.out.println("owner = " + owner);
+        model.addAttribute("owner", owner);
+        UserEntity user = userService.finById(owner);
+        List<CardEntity> cards = cardService.myCards(user);
+        System.out.println("cards = " + cards);
+        model.addAttribute("cards", cards);
+        return "payment";
+    }
+
+    @RequestMapping(value = "/payment/{owner}", method = RequestMethod.POST)
+    public String paymentPost(
+            @PathVariable UUID owner,
+            @ModelAttribute TransactionEntity transaction,
+            Model model
+    ){
+        model.addAttribute("owner", owner);
         return "payment";
     }
 
