@@ -45,7 +45,6 @@ public class TransactionRepositoryImpl implements TransactionRepository{
                 .amount(trans.getAmount())
                 .percentage(trans.getAmount() * 0.01)
                 .build();
-        //jgfyhtfytfyf
         //this is comment
         entityManager.persist(transactionEntity);
         return "Successful!!!";
@@ -71,7 +70,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
 
     public CardEntity getCardById(String id) {
         return entityManager.createQuery("select c from card c where c.id = :id", CardEntity.class)
-                .setParameter("id", id)
+                .setParameter("id",  UUID.fromString(id))
                 .getSingleResult();
     }
     public void updateCard(CardEntity card){
