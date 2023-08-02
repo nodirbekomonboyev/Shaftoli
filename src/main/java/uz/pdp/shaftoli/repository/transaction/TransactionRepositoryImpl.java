@@ -16,30 +16,39 @@ public class TransactionRepositoryImpl implements TransactionRepository{
     @PersistenceContext
     private EntityManager entityManager;
     @Override
-    public TransactionEntity save(TransactionEntity transactionEntity) {
+    public TransactionEntity save(TransactionEntity trans) {
         return null;
     }
-    public TransactionEntity saveTransaction(String senderId, String recieverId, Double amount){
-        CardEntity senderCard = getCardById(senderId);
-        CardEntity recieverCard = getCardById(recieverId);
-        if (senderCard.getBalance() < amount + amount * 0.1){
-            return null;
+
+    @Override
+    public String saveTransaction(TransactionEntity trans) {
+        CardEntity senderCard = getCardById(String.valueOf(trans.getSenderId()));
+        CardEntity recieverCard;
+        try{
+            recieverCard = getCardById(String.valueOf(trans.getReceiverId()));
         }
-        senderCard.setBalance(senderCard.getBalance() - amount - amount * 0.1);
-        recieverCard.setBalance(recieverCard.getBalance() + amount);
+        catch (NoResultException e){
+            return "userNotFound";
+        }
+        if (senderCard.getBalance() < trans.getAmount() + trans.getAmount() * 0.01){
+            return "don'tHaveEnoughtMoney";
+        }
+        senderCard.setBalance(senderCard.getBalance() - trans.getAmount() - trans.getAmount() * 0.01);
+        recieverCard.setBalance(recieverCard.getBalance() + trans.getAmount());
         updateCard(senderCard);
         updateCard(recieverCard);
 
 
         TransactionEntity transactionEntity = TransactionEntity.builder()
-                .senderId(UUID.fromString(senderId))
-                .receiverId(UUID.fromString(recieverId))
-                .amount(amount)
-                .percentage(amount * 0.1)
+                .senderId(UUID.fromString(String.valueOf(trans.getSenderId())))
+                .receiverId(UUID.fromString(String.valueOf(trans.getReceiverId())))
+                .amount(trans.getAmount())
+                .percentage(trans.getAmount() * 0.01)
                 .build();
-
+        //jgfyhtfytfyf
+        //this is comment
         entityManager.persist(transactionEntity);
-        return transactionEntity;
+        return "success";
     }
 
     public List<TransactionEntity> getByOwnerId (UUID id){
