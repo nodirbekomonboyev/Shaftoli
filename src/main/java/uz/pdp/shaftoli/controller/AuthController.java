@@ -42,8 +42,9 @@ public class AuthController {
     public String signInPage(@RequestParam String email, @RequestParam String password, Model model) {
         UserEntity user = userService.signIn(email, password);
         if (user != null ){
-            model.addAttribute("user", user);
             List<CardEntity> cards = cardService.myCards(user);
+            System.out.println("user = " + user);
+            model.addAttribute("user", user);
             model.addAttribute("balance", cardService.userCardsBalance(user));
             model.addAttribute("cards", cards);
             return "manage-cards";
