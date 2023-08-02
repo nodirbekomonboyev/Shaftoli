@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page With Light/Dark Mode</title>
     <link rel="stylesheet" href="<c:url value="/styles/menuStyle.css"/>" />
+    <link rel="stylesheet" href="<c:url value="/styles/transaction-style.css"/>" />
   </head>
   <body>
     <main>
@@ -38,29 +39,37 @@
         </header>
 
         <div class="showcase-area">
-          <div class="container">
-<!--
-            <div class="left">
-              <div class="big-title">
-                <h1>Future is here,</h1>
-                <h1>Start Exploring now.</h1>
-              </div>
-              <p class="text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Delectus eius distinctio odit, magni magnam qui ex perferendis
-                vitae!
-              </p>
-              <div class="cta">
-                <a href="#" class="btn">Get started</a>
-              </div>
-            </div>
--->
-<!--
-            <div class="right">
-              <img src="./img/person.png" alt="Person Image" class="person" />
-            </div>
--->
-          </div>
+
+            <section class="container2">
+              <h1 class="header2" style="font-family: 'Arial Rounded MT Bold'">TRANSACTION</h1>
+              <form action="/manage-cards/add-card" method="post" class="form">
+
+                <div class="input-box">
+                  <label>Card number</label>
+                  <input type="text" name="cardNumber" placeholder="Enter receiver card number" required />
+                </div>
+
+                <div class="input-box">
+                  <label>Your card</label>
+                  <input type="text" name="type" placeholder="Select a card type" list="categories">
+                  <datalist id="categories">
+                      <c:forEach items="${cards}" var="card">
+                        <option value="${card.cardNumber}">
+                      </c:forEach>
+                  </datalist>
+                </div>
+
+                <div class="input-box">
+                  <label>Summa</label>
+                  <input type="number" name="amount" placeholder="Enter amount" required />
+                </div>
+
+
+
+                <button>Submit</button>
+              </form>
+            </section>
+
         </div>
 
         <div class="bottom-area">

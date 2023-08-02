@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository{
@@ -54,6 +55,13 @@ public class UserRepositoryImpl implements UserRepository{
                 .getResultList();
     }
 
+
+    @Override
+    public UserEntity findById(UUID userId) {
+        return entityManager.createQuery("select u from users u where u.id = :id", UserEntity.class)
+                .setParameter("id", userId)
+                .getSingleResult();
+    }
 
     @Transactional
     @Override

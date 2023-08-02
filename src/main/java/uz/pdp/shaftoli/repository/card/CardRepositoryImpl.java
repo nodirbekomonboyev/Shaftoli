@@ -6,10 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.shaftoli.entity.CardEntity;
-import uz.pdp.shaftoli.entity.CardType;
 import uz.pdp.shaftoli.entity.UserEntity;
-import uz.pdp.shaftoli.repository.user.UserRepository;
-
 import java.util.List;
 
 
@@ -55,9 +52,14 @@ public class CardRepositoryImpl implements CardRepository{
 
     @Override
     public CardEntity getCardByNumbers(String numbers) {
+        try{
         return entityManager.createQuery("select c from card c where c.cardNumber = :number", CardEntity.class)
                 .setParameter("number", numbers)
                 .getSingleResult();
+        }
+        catch (NoResultException e){
+            return null;
+        }
     }
 
 
