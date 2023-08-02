@@ -58,22 +58,27 @@ public class MainController {
 
     @RequestMapping(value = "/manage-cards/add-card")
     public String getAddCard(
-            @ModelAttribute UserEntity user,
+            @RequestParam UUID owner,
             Model model
     ){
+        UserEntity user = userService.finById(owner);
+        System.out.println("user = " + user);
+        System.out.println("owner = " + owner);
+
         model.addAttribute("user", user);
-        model.addAttribute("userId", user.getId());
+        model.addAttribute("owner", owner);
         return "add-card";
     }
 
     @RequestMapping(value = "/manage-cards/add-card", method = RequestMethod.POST)
     public String addCard(
             @ModelAttribute CardEntity card,
-            @RequestParam UUID userId,
+            @RequestParam UUID owner,
             Model model
     ){
-        UserEntity user = userService.finById(userId);
+        UserEntity user = userService.finById(owner);
         System.out.println("user2" + user);
+        System.out.println("findUser" + user);
         cardService.add(card);
         model.addAttribute("user", user);
         List<CardEntity> cards = cardService.myCards(user);
