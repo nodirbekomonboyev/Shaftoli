@@ -9,6 +9,7 @@ import uz.pdp.shaftoli.entity.CardType;
 import uz.pdp.shaftoli.entity.TransactionEntity;
 import uz.pdp.shaftoli.entity.UserEntity;
 import uz.pdp.shaftoli.service.card.CardService;
+import uz.pdp.shaftoli.service.transaction.TransactionService;
 import uz.pdp.shaftoli.service.user.UserService;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class MainController {
 
     private final CardService cardService;
     private final UserService userService;
+    private final TransactionService transactionService;
 
 
     @RequestMapping(value = "/payment/{owner}")
@@ -43,8 +45,12 @@ public class MainController {
             @ModelAttribute TransactionEntity transaction,
             Model model
     ){
-
+        String result = transactionService.addTransaction(transaction);
+        model.addAttribute("message", result);
         model.addAttribute("owner", owner);
+        UserEntity user = userService.finById(owner);
+        List<CardEntity> cards = cardService.myCards(user);
+        model.addAttribute("cards", cards);
         return "payment";
     }
 
