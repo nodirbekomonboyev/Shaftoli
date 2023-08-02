@@ -23,9 +23,9 @@ public class TransactionRepositoryImpl implements TransactionRepository{
     @Override
     public String saveTransaction(TransactionEntity trans) {
         CardEntity senderCard = getCardById(String.valueOf(trans.getSenderId()));
-        CardEntity recieverCard;
+        CardEntity receiverCard;
         try{
-            recieverCard = getCardById(String.valueOf(trans.getReceiverId()));
+            receiverCard = getCardById(String.valueOf(trans.getReceiverId()));
         }
         catch (NoResultException e){
             return "Card not found";
@@ -34,9 +34,9 @@ public class TransactionRepositoryImpl implements TransactionRepository{
             return "Sorry! don't have enough money";
         }
         senderCard.setBalance(senderCard.getBalance() - trans.getAmount() - trans.getAmount() * 0.01);
-        recieverCard.setBalance(recieverCard.getBalance() + trans.getAmount());
+        receiverCard.setBalance(receiverCard.getBalance() + trans.getAmount());
         updateCard(senderCard);
-        updateCard(recieverCard);
+        updateCard(receiverCard);
 
 
         TransactionEntity transactionEntity = TransactionEntity.builder()
@@ -51,7 +51,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
     }
 
     public List<TransactionEntity> getByOwnerId (UUID id){
-        return entityManager.createQuery("select c from card c where c.ownerId = :id", TransactionEntity.class)
+        return entityManager.createQuery("select c from card c where c.owner = :id", TransactionEntity.class)
                 .setParameter("id", id)
                 .getResultList();
     }
