@@ -12,6 +12,39 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="<c:url value="/styles/card-list-style.css"/>">
+
+    <style>
+      /* Modalning asosiy konteyneri */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      /* Modal oynasi */
+      .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        width: 300px;
+        height: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        background-color: #919191;
+      }
+
+    </style>
   </head>
   <body>
     <main>
@@ -42,50 +75,50 @@
           </div>
         </header>
 
+        <div style="text-align: center">
+          <div style="border: 5px solid #ff7d00;
+                      border-radius: 10px;
+                      width: 50%;
+                      padding: 30px 10px;
+                      margin-left: 25%;
+                      text-align: center;">
+            <h3 style="color: #ff7d00">Balance</h3>
+            <h2>${balance} so'm</h2>
+          </div>
+        </div>
+
           <%--    cards list     --%>
-        <div class="slide-container swiper">
+        <div class="slide-container swiper" >
+          <link>
           <div class="slide-content">
             <div class="card-wrapper swiper-wrapper">
+              <c:forEach items="${cards}" var="card">
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img src="<c:url value="/styles/img/${card.type}.jpg"/>" alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">${card.type}</h2>
+                    <p class="description">Balance : ${card.balance} so'm</p>
+                  </div>
+                </div>
+              </c:forEach>
               <div class="card swiper-slide">
                 <div class="image-content">
                   <span class="overlay"></span>
 
                   <div class="card-image">
-                    <img src="<c:url value="/styles/img/uzcard.jpg"/>" alt="" class="card-img">
+                    <img src="<c:url value="/styles/img/newCard.jpg"/>" alt="" class="card-img">
                   </div>
                 </div>
 
                 <div class="card-content">
-                  <h2 class="name">Uzcard</h2>
-                  <p class="description">Balance : 0 so'm</p>
-                </div>
-              </div>
-              <div class="card swiper-slide">
-                <div class="image-content">
-                  <span class="overlay"></span>
-
-                  <div class="card-image">
-                    <img src="<c:url value="/styles/img/humo.jpg"/>" alt="" class="card-img">
-                  </div>
-                </div>
-
-                <div class="card-content">
-                  <h2 class="name">Humo</h2>
-                  <p class="description">Balance : 0 so'm</p>
-                </div>
-              </div>
-              <div class="card swiper-slide">
-                <div class="image-content">
-                  <span class="overlay"></span>
-
-                  <div class="card-image">
-                    <img src="<c:url value="/styles/img/visa.jpg"/>" alt="" class="card-img">
-                  </div>
-                </div>
-
-                <div class="card-content">
-                  <h2 class="name">Visa</h2>
-                  <p class="description">Balance : 0 so'm</p>
+                  <a class="button" onclick="openModal()">Add Card</a>
                 </div>
               </div>
             </div>
@@ -106,6 +139,47 @@
         </div>
       </div>
     </main>
+
+
+    <!-- Modal -->
+    <div id="profileModal" class="modal">
+      <div class="modal-content">
+        <span onclick="closeModal()" style="float: right; cursor: pointer;">&times;</span>
+
+        <form action="/manage-cards/add-card" method="post">
+          <input type="hidden" name="user" value="${user}">
+          <input type="hidden" name="ownerId" value="${user.id}">
+          <input type="text" name="cardNumber" placeholder="Enter card number">
+          <input type="password" name="password" placeholder="Enter card password">
+          <input type="number" name="balance" placeholder="Enter balance">
+          <input type="text" name="type" placeholder="Choose a card type" list="categories">
+          <datalist id="categories">
+            <option value="UZCARD">
+            <option value="HUMO">
+            <option value="VISA">
+          </datalist>
+          <input type="hidden" name="status" value="true">
+          <button>submit</button>
+        </form>
+
+        <!-- Boshqa ma'lumotlar uchun kerakli elementlarni qo'shing -->
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        var modal = document.getElementById('profileModal');
+        modal.style.display = 'block';
+      }
+
+      function closeModal() {
+        var modal = document.getElementById('profileModal');
+        modal.style.display = 'none';
+      }
+    </script>
+
+
+
 
     <!-- Swiper JS -->
     <script src="../../styles/swiper-bundle.min.js"></script>
