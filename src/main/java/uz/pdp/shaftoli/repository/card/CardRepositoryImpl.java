@@ -48,8 +48,8 @@ public class CardRepositoryImpl implements CardRepository{
 
     @Override
     public List<CardEntity> getUsersCards(UserEntity owner) {
-        return entityManager.createQuery("select c from card c where c.ownerId = :ownerId", CardEntity.class)
-                .setParameter("ownerId", owner.getId())
+        return entityManager.createQuery("select c from card c where c.owner = :owner", CardEntity.class)
+                .setParameter("owner", owner.getId())
                 .getResultList();
     }
 
