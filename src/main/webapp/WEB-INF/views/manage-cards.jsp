@@ -27,9 +27,9 @@
 
             <div class="links">
               <ul>
-                <li><a href="/payment/${user.id}"><h3>PAYMENT</h3></a></li>
-                <li><a href="/history"><h3>HISTORY</h3></a></li>
-                <li><a href="/p2p"><h3>P2P</h3></a></li>
+                <li><a href="/payment/${owner}"><h3>PAYMENT</h3></a></li>
+                <li><a href="/history/${owner}"><h3>HISTORY</h3></a></li>
+                <li><a href="/p2p/${owner}"><h3>P2P</h3></a></li>
 <!--                <li><a href="#" class="btn">Sign up</a></li>-->
               </ul>
             </div>
@@ -87,8 +87,7 @@
 
                 <div class="card-content">
                   <form action="/manage-cards/add-card">
-                    <input type="hidden" name="user" value="${user}">
-                    <input type="hidden" name="owner" value="${user.id}">
+                    <input type="hidden" name="owner" value="${owner}">
                     <button class="button" >Add Card</button>
                   </form>
                 </div>

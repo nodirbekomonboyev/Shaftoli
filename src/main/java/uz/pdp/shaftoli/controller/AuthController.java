@@ -43,8 +43,7 @@ public class AuthController {
         UserEntity user = userService.signIn(email, password);
         if (user != null ){
             List<CardEntity> cards = cardService.myCards(user);
-            System.out.println("user = " + user);
-            model.addAttribute("user", user);
+            model.addAttribute("owner", user.getId());
             model.addAttribute("balance", cardService.userCardsBalance(user));
             model.addAttribute("cards", cards);
             return "manage-cards";

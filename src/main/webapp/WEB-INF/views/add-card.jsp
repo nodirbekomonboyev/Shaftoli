@@ -11,11 +11,10 @@
   <body>
     <section class="container">
       <header>Add card form</header>
-      <form action="/manage-cards/add-card" method="post" class="form">
+      <form action="/manage-cards/add-card/${owner}" method="post" class="form">
 
         <div class="input-box">
           <label>Card Number</label>
-          <input type="hidden" name="user" value="${user}">
           <input type="hidden" name="owner" value="${owner}">
           <input type="text" name="cardNumber" placeholder="Enter card number" required />
         </div>
