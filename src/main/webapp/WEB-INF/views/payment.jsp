@@ -41,7 +41,7 @@
         <div class="showcase-area">
 
             <section class="container2">
-              <header>TRANSACTION</header>
+              <h1 class="header2" style="font-family: 'Arial Rounded MT Bold'">TRANSACTION</h1>
               <form action="/manage-cards/add-card" method="post" class="form">
 
                 <div class="input-box">
