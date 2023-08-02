@@ -45,6 +45,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
                 .amount(trans.getAmount())
                 .percentage(trans.getAmount() * 0.01)
                 .build();
+        //jgfyhtfytfyf
 
         entityManager.persist(transactionEntity);
         return "success";
