@@ -16,7 +16,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Builder
-public class CardEntity extends BaseModel{
+public class
+
+CardEntity extends BaseModel{
     @ManyToOne
     private UserEntity owner;
     private String cardNumber;
