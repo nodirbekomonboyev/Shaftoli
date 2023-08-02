@@ -30,9 +30,11 @@ public class MainController {
             @PathVariable UUID owner,
             Model model
     ){
+        System.out.println("owner = " + owner);
         model.addAttribute("owner", owner);
         UserEntity user = userService.finById(owner);
         List<CardEntity> cards = cardService.myCards(user);
+        System.out.println("cards = " + cards);
         model.addAttribute("cards", cards);
         return "payment";
     }
@@ -43,7 +45,6 @@ public class MainController {
             @ModelAttribute TransactionEntity transaction,
             Model model
     ){
-        System.out.println("transaction = " + transaction);
         String result = transactionService.addTransaction(transaction);
         model.addAttribute("message", result);
         model.addAttribute("owner", owner);
@@ -86,6 +87,8 @@ public class MainController {
             Model model
     ){
         UserEntity user = userService.finById(owner);
+        System.out.println("user = " + user);
+        System.out.println("owner = " + owner);
 
         model.addAttribute("user", user);
         model.addAttribute("owner", owner);
@@ -98,9 +101,9 @@ public class MainController {
             @RequestParam UUID owner,
             Model model
     ){
-        System.out.println("card = " + card);
-
         UserEntity user = userService.finById(owner);
+        System.out.println("findUser = " + user);
+        System.out.println("card = " + card);
         cardService.add(card);
         model.addAttribute("user", user);
         List<CardEntity> cards = cardService.myCards(user);
