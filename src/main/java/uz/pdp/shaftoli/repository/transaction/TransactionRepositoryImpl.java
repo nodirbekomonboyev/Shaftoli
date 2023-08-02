@@ -52,7 +52,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
     }
 
     public List<TransactionEntity> getByOwnerId (UUID id){
-        return entityManager.createQuery("select c from card c where c.ownerId = :id", TransactionEntity.class)
+        return entityManager.createQuery("select c from card c where c.owner = :id", TransactionEntity.class)
                 .setParameter("id", id)
                 .getResultList();
     }

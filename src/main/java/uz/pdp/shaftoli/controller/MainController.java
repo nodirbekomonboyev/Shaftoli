@@ -43,6 +43,7 @@ public class MainController {
             @ModelAttribute TransactionEntity transaction,
             Model model
     ){
+
         model.addAttribute("owner", owner);
         return "payment";
     }
