@@ -25,7 +25,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
         CardEntity senderCard = getCardByNumber(String.valueOf(trans.getSenderId()));
         CardEntity receiverCard;
         try{
-            receiverCard = getCardByNumber(trans.getReceiverId());
+            receiverCard = getCardByNumber(String.valueOf(trans.getReceiverId()));
         }
         catch (NoResultException e){
             return "Card not found";
