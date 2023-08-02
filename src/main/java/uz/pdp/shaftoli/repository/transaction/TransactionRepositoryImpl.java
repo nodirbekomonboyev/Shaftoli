@@ -79,9 +79,9 @@ public class TransactionRepositoryImpl implements TransactionRepository{
         }
     }
     public void updateCard(CardEntity card){
-        entityManager.createQuery("update card set balance = :balance where id = :id", CardEntity.class)
-                .setParameter("balance", card.getBalance())
+        entityManager.createQuery("update card c set c.balance = :balance where c.id = :id", CardEntity.class)
                 .setParameter("id", card.getId())
+                .setParameter("balance", card.getBalance())
                 .getSingleResult();
     }
 
