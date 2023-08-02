@@ -14,8 +14,8 @@ import java.util.UUID;
 @Data
 @Builder
 public class TransactionEntity extends BaseModel{
-    private UUID senderId;
-    private UUID receiverId;
+    private String senderId;
+    private String receiverId;
     private Double amount;
     private Double percentage;
 }
