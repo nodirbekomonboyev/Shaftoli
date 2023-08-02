@@ -40,8 +40,8 @@ public class TransactionRepositoryImpl implements TransactionRepository{
 
 
         TransactionEntity transactionEntity = TransactionEntity.builder()
-                .senderId(UUID.fromString(String.valueOf(trans.getSenderId())))
-                .receiverId(UUID.fromString(String.valueOf(trans.getReceiverId())))
+                .senderId(trans.getSenderId())
+                .receiverId(trans.getReceiverId())
                 .amount(trans.getAmount())
                 .percentage(trans.getAmount() * 0.01)
                 .build();
@@ -79,7 +79,7 @@ public class TransactionRepositoryImpl implements TransactionRepository{
         }
     }
     public void updateCard(CardEntity card){
-        entityManager.createQuery("update card set balance = :balance where id = :id", CardEntity.class)
+        entityManager.createQuery("update card c set c.balance = :balance where c.id = :id", CardEntity.class)
                 .setParameter("id", card.getId())
                 .setParameter("balance", card.getBalance())
                 .getSingleResult();
