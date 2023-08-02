@@ -7,6 +7,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page With Light/Dark Mode</title>
     <link rel="stylesheet" href="<c:url value="/styles/menuStyle.css"/>" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="<c:url value="/styles/swiper-bundle.min.css"/>"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="<c:url value="/styles/card-list-style.css"/>">
+
+    <style>
+      /* Modalning asosiy konteyneri */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      /* Modal oynasi */
+      .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        width: 300px;
+        height: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        background-color: #919191;
+      }
+
+    </style>
   </head>
   <body>
     <main>
@@ -37,30 +75,58 @@
           </div>
         </header>
 
-        <div class="showcase-area">
-          <div class="container">
-<!--
-            <div class="left">
-              <div class="big-title">
-                <h1>Future is here,</h1>
-                <h1>Start Exploring now.</h1>
-              </div>
-              <p class="text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Delectus eius distinctio odit, magni magnam qui ex perferendis
-                vitae!
-              </p>
-              <div class="cta">
-                <a href="#" class="btn">Get started</a>
-              </div>
-            </div>
--->
-<!--
-            <div class="right">
-              <img src="./img/person.png" alt="Person Image" class="person" />
-            </div>
--->
+        <div style="text-align: center">
+          <div style="border: 5px solid #ff7d00;
+                      border-radius: 10px;
+                      width: 50%;
+                      padding: 30px 10px;
+                      margin-left: 25%;
+                      text-align: center;">
+            <h3 style="color: #ff7d00">Balance</h3>
+            <h2>${balance} so'm</h2>
           </div>
+        </div>
+
+          <%--    cards list     --%>
+        <div class="slide-container swiper" >
+          <link>
+          <div class="slide-content">
+            <div class="card-wrapper swiper-wrapper">
+              <c:forEach items="${cards}" var="card">
+                <div class="card swiper-slide">
+                  <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                      <img src="<c:url value="/styles/img/${card.type}.jpg"/>" alt="" class="card-img">
+                    </div>
+                  </div>
+
+                  <div class="card-content">
+                    <h2 class="name">${card.type}</h2>
+                    <p class="description">Balance : ${card.balance} so'm</p>
+                  </div>
+                </div>
+              </c:forEach>
+              <div class="card swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+
+                  <div class="card-image">
+                    <img src="<c:url value="/styles/img/newCard.jpg"/>" alt="" class="card-img">
+                  </div>
+                </div>
+
+                <div class="card-content">
+                  <a class="button" onclick="openModal()">Add Card</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-button-next swiper-navBtn"></div>
+          <div class="swiper-button-prev swiper-navBtn"></div>
+          <div class="swiper-pagination"></div>
         </div>
 
         <div class="bottom-area">
@@ -74,7 +140,52 @@
       </div>
     </main>
 
-    <!-- JavaScript Files -->
+
+    <!-- Modal -->
+    <div id="profileModal" class="modal">
+      <div class="modal-content">
+        <span onclick="closeModal()" style="float: right; cursor: pointer;">&times;</span>
+
+        <form action="/manage-cards/add-card" method="post">
+          <input type="hidden" name="user" value="${user}">
+          <input type="hidden" name="ownerId" value="${user.id}">
+          <input type="text" name="cardNumber" placeholder="Enter card number">
+          <input type="password" name="password" placeholder="Enter card password">
+          <input type="number" name="balance" placeholder="Enter balance">
+          <input type="text" name="type" placeholder="Choose a card type" list="categories">
+          <datalist id="categories">
+            <option value="UZCARD">
+            <option value="HUMO">
+            <option value="VISA">
+          </datalist>
+          <input type="hidden" name="status" value="true">
+          <button>submit</button>
+        </form>
+
+        <!-- Boshqa ma'lumotlar uchun kerakli elementlarni qo'shing -->
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        var modal = document.getElementById('profileModal');
+        modal.style.display = 'block';
+      }
+
+      function closeModal() {
+        var modal = document.getElementById('profileModal');
+        modal.style.display = 'none';
+      }
+    </script>
+
+
+
+
+    <!-- Swiper JS -->
+    <script src="../../styles/swiper-bundle.min.js"></script>
+
+    <!-- JavaScript -->
+    <script src="../../styles/script.js"></script>
 
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <script src="../../styles/app2.js"></script>
