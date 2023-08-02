@@ -3,11 +3,9 @@ package uz.pdp.shaftoli.repository.email;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import uz.pdp.shaftoli.entity.EmailCodeEntity;
-import uz.pdp.shaftoli.repository.user.UserRepository;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -51,7 +49,6 @@ public class EmailCodeRepositoryImpl implements EmailCodeRepository{
 
     @Transactional
     @Override
-
     public Boolean checkEmailAndCode(String userEmail, String code) {
         EmailCodeEntity result = findByEmail(userEmail);
         boolean isBefore = LocalDateTime.now().isBefore(result.getLimits());
