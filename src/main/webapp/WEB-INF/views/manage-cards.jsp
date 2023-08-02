@@ -148,7 +148,7 @@
 
         <form action="/manage-cards/add-card" method="post">
           <input type="hidden" name="user" value="${user}">
-          <input type="hidden" name="ownerId" value="${user.id}">
+          <input type="hidden" name="owner" value="${user.id}">
           <input type="text" name="cardNumber" placeholder="Enter card number">
           <input type="password" name="password" placeholder="Enter card password">
           <input type="number" name="balance" placeholder="Enter balance">
