@@ -7,6 +7,7 @@ import uz.pdp.shaftoli.repository.user.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -40,6 +41,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserEntity signIn(String email, String password) {
         return userRepository.signIn(email,password);
+    }
+
+    @Override
+    public UserEntity finById(UUID userId) {
+        userRepository.findById(userId);
     }
 
 }
