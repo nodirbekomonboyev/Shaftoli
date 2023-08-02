@@ -1,6 +1,5 @@
 package uz.pdp.shaftoli.repository.transaction;
 
-import org.hibernate.Transaction;
 import uz.pdp.shaftoli.entity.TransactionEntity;
 import uz.pdp.shaftoli.repository.BaseRepository;
 
