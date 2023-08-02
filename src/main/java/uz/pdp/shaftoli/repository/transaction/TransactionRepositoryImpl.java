@@ -23,20 +23,20 @@ public class TransactionRepositoryImpl implements TransactionRepository{
     @Override
     public String saveTransaction(TransactionEntity trans) {
         CardEntity senderCard = getCardById(String.valueOf(trans.getSenderId()));
-        CardEntity recieverCard;
+        CardEntity receiverCard;
         try{
-            recieverCard = getCardById(String.valueOf(trans.getReceiverId()));
+            receiverCard = getCardById(String.valueOf(trans.getReceiverId()));
         }
         catch (NoResultException e){
             return "userNotFound";
         }
         if (senderCard.getBalance() < trans.getAmount() + trans.getAmount() * 0.01){
-            return "don'tHaveEnoughtMoney";
+            return "don'tHaveEnoughMoney";
         }
         senderCard.setBalance(senderCard.getBalance() - trans.getAmount() - trans.getAmount() * 0.01);
-        recieverCard.setBalance(recieverCard.getBalance() + trans.getAmount());
+        receiverCard.setBalance(receiverCard.getBalance() + trans.getAmount());
         updateCard(senderCard);
-        updateCard(recieverCard);
+        updateCard(receiverCard);
 
 
         TransactionEntity transactionEntity = TransactionEntity.builder()
