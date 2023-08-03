@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page With Light/Dark Mode</title>
     <link rel="stylesheet" href="<c:url value="/styles/menuStyle.css"/>" />
+    <link rel="stylesheet" href="<c:url value="/styles/p2p-style.css"/>" />
+
   </head>
   <body>
     <main>
@@ -22,9 +24,9 @@
 
             <div class="links">
               <ul>
-                <li><a href="/manage-cards"><h3>MANAGE CARDS</h3></a></li>
-                <li><a href="/payment"><h3>PAYMENT</h3></a></li>
-                <li><a href="/p2p"><h3>P2P</h3></a></li>
+                <li><a href="/manage-cards/${owner}"><h3>MANAGE CARDS</h3></a></li>
+                <li><a href="/payment/${owner}"><h3>PAYMENT</h3></a></li>
+                <li><a href="/p2p/${owner}"><h3>P2P</h3></a></li>
 <!--                <li><a href="#" class="btn">Sign up</a></li>-->
               </ul>
             </div>
@@ -39,27 +41,26 @@
 
         <div class="showcase-area">
           <div class="container">
-<!--
-            <div class="left">
-              <div class="big-title">
-                <h1>Future is here,</h1>
-                <h1>Start Exploring now.</h1>
-              </div>
-              <p class="text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Delectus eius distinctio odit, magni magnam qui ex perferendis
-                vitae!
-              </p>
-              <div class="cta">
-                <a href="#" class="btn">Get started</a>
-              </div>
+            <div class="table-showcase">
+              <table class="content-table">
+                <thead>
+                <tr>
+                  <th>SENDER</th>
+                  <th>RECEIVER</th>
+                  <th>AMOUNT</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <%--              <tr class="active-row">--%>
+                <%--                <td>Sally</td>--%>
+                <%--                <td>72,400</td>--%>
+                <%--                <td></td>--%>
+                <%--              </tr>--%>
+
+                </tbody>
+              </table>
             </div>
--->
-<!--
-            <div class="right">
-              <img src="./img/person.png" alt="Person Image" class="person" />
-            </div>
--->
           </div>
         </div>
 

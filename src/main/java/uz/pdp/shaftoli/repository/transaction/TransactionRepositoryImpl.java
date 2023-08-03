@@ -94,5 +94,9 @@ public class TransactionRepositoryImpl implements TransactionRepository{
                 .getResultList();
     }
 
+    @Override
+    public List<TransactionEntity> allUserTransactions(UUID id) {
 
+        return null;
+    }
 }

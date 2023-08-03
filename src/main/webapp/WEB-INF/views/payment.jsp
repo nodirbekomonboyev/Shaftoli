@@ -23,9 +23,9 @@
 
             <div class="links">
               <ul>
-                <li><a href="/manage-cards"><h3>MANAGE CARDS</h3></a></li>
-                <li><a href="/history"><h3>HISTORY</h3></a></li>
-                <li><a href="/p2p"><h3>P2P</h3></a></li>
+                <li><a href="/manage-cards/${owner}"><h3>MANAGE CARDS</h3></a></li>
+                <li><a href="/history/${owner}"><h3>HISTORY</h3></a></li>
+                <li><a href="/p2p/${owner}"><h3>P2P</h3></a></li>
 <!--                <li><a href="#" class="btn">Sign up</a></li>-->
               </ul>
             </div>
@@ -64,8 +64,6 @@
                   <label>Summa</label>
                   <input type="number" name="amount" placeholder="Enter amount" required />
                 </div>
-
-
 
                 <button>Submit</button>
               </form>
