@@ -28,7 +28,7 @@
               </div>
               <p class="text">Emailingizga(${user.email}) kod yuborildi. Kodni kiritib emailingizni tasdiqlang!</p>
               <p style="color: red">${massage}</p>
-                <form action="/auth/sign-up/verification" method="post" class="sign-up-form">
+                <form action="/auth/sign-up/verification/${user.id}" method="post" class="sign-up-form">
                 <div  class="input-field">
                     <i class="fas fa-lock"></i>
                     <input type="hidden" name="userEmail" value="${user.email}">
