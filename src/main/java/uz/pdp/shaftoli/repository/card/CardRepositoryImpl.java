@@ -61,6 +61,12 @@ public class CardRepositoryImpl implements CardRepository{
             return null;
         }
     }
+    public List<CardEntity> getAllCardUsers(String userId){
+        return entityManager.createQuery("select c from card c where c.owner = :id", CardEntity.class)
+                .setParameter("id", userId)
+                .getResultList();
+    }
+
 
 
 }
