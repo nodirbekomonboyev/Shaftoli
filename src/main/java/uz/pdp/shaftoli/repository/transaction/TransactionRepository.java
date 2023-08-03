@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface TransactionRepository extends BaseRepository<TransactionEntity> {
     String saveTransaction(TransactionEntity trans);
     List<TransactionEntity> getByOwnerId (UUID id);
+    List<TransactionEntity> getAllTransactions(UUID id);
 }

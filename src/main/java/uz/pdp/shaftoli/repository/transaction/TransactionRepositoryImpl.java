@@ -88,6 +88,11 @@ public class TransactionRepositoryImpl implements TransactionRepository{
                 .setParameter("balance", card.getBalance())
                 .executeUpdate();
     }
+    public List<TransactionEntity> getAllTransactions(UUID id){
+        return entityManager.createQuery("select t from transaction t where t.id = :id", TransactionEntity.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
 
 
 }
