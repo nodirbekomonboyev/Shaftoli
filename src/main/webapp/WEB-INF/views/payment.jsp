@@ -65,8 +65,6 @@
                   <input type="number" name="amount" placeholder="Enter amount" required />
                 </div>
 
-
-
                 <button>Submit</button>
               </form>
             </section>
